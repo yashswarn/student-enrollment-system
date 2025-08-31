@@ -1,0 +1,240 @@
+<div class="container mt-3 p-4 border rounded shadow bg-white w-75">
+  <h4 class="mb-4">Students Enrollment Form</h4>
+  <hr />
+  <div class="">
+    <div class="mb-3">
+      <label for="dept1" class="form-label "
+        >Departments:
+        <span class="text-danger">*</span>
+      </label>
+      <select
+        id="dept1"
+        class="form-select w-50"
+        [(ngModel)]="selectedDept1"
+        (change)="onDepartmentChange()"
+        name="department"
+        required
+        #deptRef="ngModel"
+        [ngClass]="{'is-invalid':deptRef.invalid && isGetDetails}"
+        [disabled]="isGetDetails && !isReset && students.length>0"
+      >
+        <option [ngValue]="null">Select Department</option>
+        <option *ngFor="let dept1 of departments" [ngValue]="dept1">
+          {{ dept1.DEPARTMENT_NAME }}
+        </option>
+      </select>
+      <div *ngIf="deptRef.invalid && isGetDetails" class="text-danger">
+        Department is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="course" class="form-label"
+        >Course:
+        <span class="text-danger">*</span>
+      </label>
+      <select
+        id="course"
+        class="form-select w-50"
+        [(ngModel)]="selectedCourse"
+        (change)="onCourseChange()"
+        required
+        #courseRef="ngModel"
+        [ngClass]="{'is-invalid':courseRef.invalid && isGetDetails}"
+        [disabled]="isGetDetails && !isReset && students.length>0"
+      >
+        <option [ngValue]="null">Select Course</option>
+        <option *ngFor="let course of courses" [ngValue]="course">
+          {{ course.COURSE_NAME}}
+        </option>
+      </select>
+      <div *ngIf="courseRef.invalid && isGetDetails" class="text-danger">
+        course is required
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="dept2" class="form-label"
+        >Get Students Departments:
+        <span class="text-danger">*</span>
+      </label>
+      <select
+        id="dept2"
+        class="form-select w-50"
+        [(ngModel)]="selectedDept2"
+        name="department"
+        required
+        #deptRef1="ngModel"
+        [ngClass]="{'is-invalid':deptRef1.invalid && isGetDetails}"
+        [disabled]="isGetDetails && !isReset && students.length>0"
+      >
+        <option [ngValue]="null">Select Department</option>
+        <option *ngFor="let dept2 of departments" [ngValue]="dept2">
+          {{ dept2.DEPARTMENT_NAME }}
+        </option>
+      </select>
+      <div *ngIf="deptRef1.invalid && isGetDetails" class="text-danger">
+        Department is required
+      </div>
+    </div>
+
+    <div class="d-flex gap-5">
+      <div>
+        <button
+          class="btn btn-primary btn-success"
+          [disabled]="isGetDetails && students.length>0 && !isReset"
+          (click)="onSubmit()"
+        >
+          Get Details
+        </button>
+      </div>
+
+      <div *ngIf="students.length>0 && isGetDetails">
+        <button (click)="onReset()" class="btn btn-primary btn-danger">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-4" *ngIf="onSubmit">
+      <div *ngIf="students.length > 0">
+        <table class="table table-scriped table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th class="text-center">Sr. No.</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th class="text-center">Mobile Number</th>
+              <th class="text-center">Select Student</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of students; let i = index">
+              <td class="text-center">{{ i + 1 }}</td>
+              <td>{{ s.name }}</td>
+              <td>{{ s.email }}</td>
+              <td class="text-center">{{ s.Mobile_number}}</td>
+              <td class="text-center">
+                <input
+                  type="checkbox"
+                  (change)="onCheckBoxChange($event,s.student_id)"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="isGetDetails && students.length>0">
+      <button class="btn btn-primary btn-success" (click)="enrollStudent()">
+        Enroll
+      </button>
+    </div>
+
+    <div
+      class="modal fade"
+      id="successModal"
+      tabindex="-1"
+      aria-labelledby="successModalLabel"
+      aria-hidden="true"
+      #successModal
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="successModalLabel">
+              Success
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Students enrolled successfully!</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="alreadyEnrolledModal"
+      tabindex="-1"
+      aria-labelledby="alreadyEnrolledModalLabel"
+      aria-hidden="true"
+      #alreadyEnrolledModal
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-warning text-dark">
+            <h5 class="modal-title" id="alreadyEnrolledModalLabel">
+              Enrollment Alert
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Student is already enrolled in this course.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Okay
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+    class="modal fade"
+    id="noRecordsModal"
+    tabindex="-1"
+    aria-labelledby="noRecordsModalLabel"
+    aria-hidden="true"
+    #noRecordsModal
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title" id="noRecordsModalLabel">Enrollment Alert</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">No records found</div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Okay
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div>
+  <h2 class="fw-bold text-center mb-4 mt-4">Students List</h2>
+  <!-- <hr /> -->
+
+  <div class="mb-4">
+    <label for="search" class="form-label">Search by name: </label>
+    <input
+      type="search"
+      id="search"
+      class="form-input"
+      [(ngModel)]="searchedName"
+      (ngModelChange)="onSearchChange($event)"
+    />
+
+    <!-- <label for="email" class="form-label">Search by email: </label>
+    <input
+      type="email"
+      id="email"
+      class="form-input"
+      [(ngModel)]="searchedEmail"
+      (ngModelChange)="onSearchChange($event)"
+    /> -->
+    <button class="btn btn-primary btn-success ms-3" (click)="onSearch()">Search</button>
+  </div>
+
+  <table class="table table-scripted table-bordered" *ngIf="viewStudents && !isSearch">
+    <thead class="thead-dark">
+      <tr>
+        <th class="text-center">Sr No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th class="text-center">Mobile No</th>
+        <th>Department_Id</th>
+        <th>Gender</th>
+        <th>DOB</th>
+        <th class="text-center">
+          Options
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of viewStudents; let i=index">
+        <td class="text-center">{{ (currentPage-1)*limit+(i+1) }}</td>
+        <td>{{student.Name}}</td>
+        <td>{{student.Email}}</td>
+        <td class="text-center">{{student.Mobile_number}}</td>
+        <td>{{student.Department_id}}</td>
+        <td>{{student.Gender}}</td>
+        <td>{{student.Date_of_Birth}}</td>
+        <td class="text-center">
+          <button class="text-white btn btn-success bg-black" mat-button [matMenuTriggerFor]="menu7">
+            Action
+          </button>
+          <mat-menu #menu7="matMenu">
+            <button class="btn btn-success" mat-menu-item>Edit</button>
+            <button class="btn btn-success" (click)="deleteStudent(student.Student_id)" mat-menu-item >
+              Delete
+            </button>
+          </mat-menu>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-scripted table-bordered" *ngIf="searchedStudents && isSearch">
+    <thead class="thead-dark">
+      <tr>
+        <th class="text-center">Sr No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th class="text-center">Mobile No</th>
+        <th>Department_Id</th>
+        <th>Gender</th>
+        <th>DOB</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of searchedStudents; let i=index">
+        <td class="text-center">{{ (currentPage-1)*limit+(i+1) }}</td>
+        <td>{{student.Name}}</td>
+        <td>{{student.Email}}</td>
+        <td class="text-center">{{student.Mobile_number}}</td>
+        <td>{{student.Department_id}}</td>
+        <td>{{student.Gender}}</td>
+        <td>{{student.Date_of_Birth}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <button class="btn btn-success" (click)="prevPage()" [disabled]="currentPage===1">Prev</button>
+    <span> Page {{currentPage}} of {{totalPages}} </span>
+    <button class="btn btn-success" (click)="nextPage()" [disabled]="currentPage===totalPages">Next</button>
+  </div>
+
+  
+
+  <!-- <div *ngIf="searchedStudents">
+    <p>No data found YRR</p>
+  </div> -->
+
+  <ng-template #noData>
+    <p>No data found</p>
+  </ng-template>
+</div>

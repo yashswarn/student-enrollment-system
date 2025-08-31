@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "CSE",
+    "courses": [
+      {
+        "id": 1,
+        "name": "DSA",
+        "students": [
+          { "id": 1, "name": "Rajat", "email":"rajat@gmail.com","marks":91 },
+          { "id": 2, "name": "Sohil", "email":"sohil@gmail.com","marks":89 },
+          { "id": 3, "name": "Rohan", "email":"rohan@gmail.com","marks":null }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "OOPS",
+        "students": [
+            { "id": 1, "name": "Pooja", "email":"pooja@gmail.com", "marks": 80 }
+        ]
+      },
+      {
+        "id":3,
+        "name":"OS"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "ME",
+    "courses": [
+      {
+        "id": 4,
+        "name": "Thermodynamics",
+        "students": [
+          { "id": 4, "name": "Naman", "email":"naman@gmail.com", "marks": 65},
+          { "id": 5, "name": "Ravi", "email":"ravi@gmail.com", "marks":50 }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Fluid Mechanics",
+        "students": [
+          { "id": 5, "name": "Yugant", "email":"yugant@gmail.com", "marks":98  },
+          { "id": 6, "name": "Priyanshu", "email":"priyanshu@gmail.com", "marks":87  }
+        ]
+      }
+    ]
+  }
+]

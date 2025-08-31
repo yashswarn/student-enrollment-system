@@ -1,0 +1,135 @@
+<div class="mt-2 ms-2 p-4 border rounded shadow bg-light w-25">
+  <h4 class="">Register</h4>
+  <hr />
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <div class="mb-1">
+        <label for="email" class="form-label"
+          >Email :
+          <span class="text-danger">*</span>
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          class="form-control "
+          formControlName="email"
+          [ngClass]="{'is-invalid':f['email'].errors && isSubmitted}"
+        />
+      </div>
+      <div *ngIf="f['email'].errors && isSubmitted" class="text-danger ps-2">
+        <div *ngIf="f['email'].errors?.['required']">Email is required.</div>
+        <div *ngIf="f['email'].errors?.['email']">Email is invalid;</div>
+        <div *ngIf="f['email'].errors?.['pattern']">Email is invalid;</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div class="mb-1">
+        <label for="password" class="form-label"
+          >Password :
+          <span class="text-danger">*</span>
+        </label>
+        <div class="d-flex">
+          <input
+            id="password"
+            [type]="isShowPassword?'text':'password'"
+            class="form-control"
+            formControlName="password"
+            [ngClass]="{'is-invalid':isSubmitted && f['password'].errors}"
+          />
+          <button
+            type="button"
+            class="btn position-relative"
+            (click)="togglePassword()"
+          >
+            <mat-icon
+              >{{isShowPassword?'visibility_off':'visibility'}}</mat-icon
+            >
+          </button>
+        </div>
+      </div>
+      <div *ngIf="f['password'].errors && isSubmitted" class="text-danger ps-2">
+        <div *ngIf="f['password'].errors?.['required']">
+          Password is required.
+        </div>
+        <div *ngIf="f['password'].errors?.['minlength']">
+          Password must be at least 6 characters
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary w-100 btn-success">
+        Register
+      </button>
+    </div>
+    <div class="mt-2 text-center">
+        Already registered? <a href="loginpage" class="link-offset-2 link-underline link-underline-opacity-0">Login</a>
+    </div>
+  </form>
+  <div
+    class="modal fade"
+    id="successModal"
+    tabindex="-1"
+    aria-labelledby="successModalLabel"
+    aria-hidden="true"
+    #successModal
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="successModalLabel">
+            Success
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">Registered successfully!</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="alreadyRegisteredModal"
+    tabindex="-1"
+    aria-labelledby="alreadyRegisteredModalLabel"
+    aria-hidden="true"
+    #alreadyRegisteredModal
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title" id="alreadyRegisteredModalLabel">
+            Register Alert
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">User already registered.</div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Okay
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
