@@ -322,3 +322,23 @@ exports.getSearchedName=async(req,res)=>{
   }
 
 }
+
+exports.deleteStudent=async(req,res)=>{
+  const studentId=req.params.Student_id;
+  console.log("req body is->",req.body);
+  console.log("req query is->",req.query);
+  console.log("req params is->",req.params);
+
+  console.log("student id at backend is ->",studentId);
+  try{
+    await db.execute(`delete from enrollments where student_id=?`,[studentId])
+    await db.execute(`delete from student where Student_id=?`,[studentId])
+
+    res.status(200).json({message:"Student deleted successfully"});
+
+  }
+  catch(error){
+    console.error("query error",error);
+    res.status(400).send({message:"query error",err:error.message});
+  }
+}

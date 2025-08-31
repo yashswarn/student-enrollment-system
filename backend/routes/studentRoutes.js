@@ -10,6 +10,6 @@ router.get('/for-enrollment',studentController.getStudentsOfDept);
 router.get('/for-marks',studentController.getStudentsOfCourse)
 router.get('/count',studentController.getCount);
 router.get('/getsearchedname',studentController.getSearchedName);
-
+router.delete('/deletestudent/:Student_id',studentController.deleteStudent);
 
 module.exports=router;
