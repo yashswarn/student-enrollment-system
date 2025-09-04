@@ -11,17 +11,20 @@ import { CommonModule } from '@angular/common';
 declare var bootstrap: any;
 import { HttpClient } from '@angular/common/http';
 import { StudentService } from '../../services/student.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [ CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './student.html',
   styleUrls: ['./student.css'],
 })
 export class Student implements OnInit {
   @ViewChild('successModal') successModal!: ElementRef;
   @ViewChild('alreadyRegisteredModal') alreadyRegisteredModal!: ElementRef;
+  @ViewChild('updateStudentModal') updateStudentModal!: ElementRef;
+
 
   studentForm!: FormGroup;
   isSubmitted = false;
@@ -31,18 +34,37 @@ export class Student implements OnInit {
   selectedDept: any[] = [];
   departments: any[] = [];
   DEPARTMENT_ID: number = 0;
-  isEdit:boolean=false;
+  studentId: number | null = null;
+  isEdit: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.studentService.getDepartments().subscribe((data: any) => {
-      console.log('departments loaded:', data);
-      this.departments = data;
-    });
+    this.studentId = this.route.snapshot.params['id'];
+    console.log('student id at frontend angular is->', this.studentId);
+
+    if (this.studentId) {
+      // edit mode fetch student data using student id
+
+      this.studentService
+        .getStudentById(this.studentId)
+        .subscribe((data: any) => {
+          const studentDob=data;
+          studentDob.dob=studentDob.dob.split('T')[0];
+          console.log('student data of editable student is->', data);
+          this.studentForm.patchValue(data);
+        });
+    } 
+      this.studentService.getDepartments().subscribe((data: any) => {
+        console.log('departments loaded:', data);
+        this.departments = data;
+      });
+    
+
     const today = new Date();
 
     const min = new Date(
@@ -193,7 +215,45 @@ export class Student implements OnInit {
   onSubmit() {
     this.isSubmitted = true;
 
-    if (this.studentForm.valid) {
+    // update
+    if (this.studentForm.valid && this.studentId) {
+      
+      // Trim name
+      const trimName = this.studentForm.value.name.trim();
+      this.studentForm.patchValue({ name: trimName });
+
+      // Call backend service
+      this.studentService
+        .updateStudent(this.studentId, this.studentForm.value)
+        .subscribe({
+          next: () => {
+            console.log(
+              'Student updated successfully:',
+              this.studentForm.value
+            );
+
+            
+            // Show success modal
+            const modal = new bootstrap.Modal(this.updateStudentModal.nativeElement);
+            modal.show();
+            
+            this.submittedStudents.push(this.studentForm.value);
+            this.studentForm.reset();
+            this.isSubmitted = false;
+          },
+          error: (err: any) => {
+            console.error('Error while updating student data ', err);
+            // alert('All fields are mandatory or invalid!');
+            // this.studentForm.markAllAsTouched();
+
+            const modal = new bootstrap.Modal(
+              this.alreadyRegisteredModal.nativeElement
+            );
+            modal.show();
+            // this.studentForm.reset();
+          },
+        });
+    } else if (this.studentForm.valid) {
       // Format DOB
       // const dob = this.studentForm.get('dob')?.value;
       // if (dob) {
@@ -231,7 +291,6 @@ export class Student implements OnInit {
           );
           modal.show();
           this.studentForm.reset();
-
         },
       });
     } else {

@@ -24,6 +24,11 @@ export const routes: Routes = [
         data:{roles:['admin']}
     },
     {
+        path:'registerstudent/:id',
+        component:Student
+
+    },
+    {
         path:'studentsdata',
         component: DepartmentFilterComponent,
         canActivate:[authGuard],

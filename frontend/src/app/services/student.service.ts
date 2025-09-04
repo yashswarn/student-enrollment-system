@@ -35,6 +35,17 @@ export class StudentService {
     );
   }
 
+  getStudentById(studentId:number){
+    return this.http.get(`http://localhost:3000/students/getstudentbyid/${studentId}`)
+  }
+
+  updateStudent(studentId:number,submittedStudents:any){
+    return this.http.put(
+      `http://localhost:3000/students/update/${studentId}`,
+      submittedStudents
+    );
+  }
+
   addStudents(submittedStudents: any) {
     console.log(
       'student data of the registered student is->',

@@ -277,68 +277,152 @@ exports.getStudentsOfCourse = async (req, res) => {
   // });
 };
 
-exports.getCount=async(req,res)=>{
-  try{
-    const [sql]=await db.execute('select count(*) as total_students from student');
+exports.getCount = async (req, res) => {
+  try {
+    const [sql] = await db.execute(
+      "select count(*) as total_students from student"
+    );
     console.log(sql);
     res.json(sql);
-  }
-  catch(error){
+  } catch (error) {
     res.status(400).send("query error");
   }
-}
+};
 
-exports.getSearchedName=async(req,res)=>{
-  const page=parseInt(req.query.page) || 1;
-  const limit=parseInt(req.query.limit) || 6;
-  const searchName=req.query.searchedName || "";
+exports.getSearchedName = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 6;
+  const searchName = req.query.searchedName || "";
 
-  const offset=(page-1)*limit;
-  console.log("req query is",req.query);
+  const offset = (page - 1) * limit;
+  console.log("req query is", req.query);
 
-  console.log("searched name at backnd side is:",searchName);
+  console.log("searched name at backnd side is:", searchName);
 
-  try{
+  try {
     // 1. Get filtered students with LIMIT & OFFSET
-    const [sql]=await db.execute(`select * from student where name like ? limit ${limit} offset ${offset}`, [`%${searchName}%`] );
-    console.log("the student with name is ",sql);
-    
+    const [sql] = await db.execute(
+      `select * from student where name like ? limit ${limit} offset ${offset}`,
+      [`%${searchName}%`]
+    );
+    console.log("the student with name is ", sql);
+
     // 2. Get total count for pagination
-    const [totalStudents]=await db.execute(`select count(*) as total from student where name like ?`,[`%${searchName}%`])
-    
-    const totalRecords=totalStudents[0].total;
-    const totalPages=Math.ceil(totalRecords/limit);
-    
+    const [totalStudents] = await db.execute(
+      `select count(*) as total from student where name like ?`,
+      [`%${searchName}%`]
+    );
+
+    const totalRecords = totalStudents[0].total;
+    const totalPages = Math.ceil(totalRecords / limit);
+
     res.json({
       // totalStudents,
       totalPages,
-      currentPage:page,
-      students:sql
+      currentPage: page,
+      students: sql,
     });
+  } catch (err) {
+    console.error("query error", err);
+    res.status(400).json({ message: "query error", error: err.message });
   }
-  catch(err){
-    console.error("query error",err)
-    res.status(400).json({message:"query error", error:err.message});
+};
+
+exports.deleteStudent = async (req, res) => {
+  const studentId = req.params.Student_id;
+  console.log("req body is->", req.body);
+  console.log("req query is->", req.query);
+  console.log("req params is->", req.params);
+
+  console.log("student id at backend is ->", studentId);
+  try {
+    await db.execute(`delete from enrollments where student_id=?`, [studentId]);
+    await db.execute(`delete from student where Student_id=?`, [studentId]);
+
+    res.status(200).json({ message: "Student deleted successfully" });
+  } catch (error) {
+    console.error("query error", error);
+    res.status(400).send({ message: "query error", err: error.message });
   }
+};
 
-}
+exports.getStudentById = async (req, res) => {
+  const studentId = req.params.studentId;
+  console.log("student id at backend is->", studentId);
 
-exports.deleteStudent=async(req,res)=>{
-  const studentId=req.params.Student_id;
-  console.log("req body is->",req.body);
-  console.log("req query is->",req.query);
-  console.log("req params is->",req.params);
-
-  console.log("student id at backend is ->",studentId);
-  try{
-    await db.execute(`delete from enrollments where student_id=?`,[studentId])
-    await db.execute(`delete from student where Student_id=?`,[studentId])
-
-    res.status(200).json({message:"Student deleted successfully"});
-
+  try {
+    const [sql] = await db.execute(
+      `SELECT 
+      name, 
+    email, 
+  department_id as department, 
+  mobile_number AS mobile, 
+  gender AS gender, 
+  date_of_birth AS dob,
+  student_id
+FROM student WHERE student_id = ?
+`,
+      [studentId]
+    );
+    res.json(sql[0]);
+  } catch (err) {
+    console.error("query error");
+    res.status(500).json({ message: "server error", error: err.message });
   }
-  catch(error){
-    console.error("query error",error);
-    res.status(400).send({message:"query error",err:error.message});
+};
+
+exports.updateStudent = async (req, res) => {
+  const { name, email, department, dob, gender, mobile } = req.body;
+  const studentId = req.params.studentId;
+  console.log("student Id is at update student is->", studentId);
+
+  console.log("req body is->", req.body);
+
+  let connection;
+
+  try {
+    // Get a connection from pool
+    connection = await db.getConnection();
+
+    // Start transaction
+    await connection.beginTransaction();
+
+    // Check if email already exists
+    const [existingEmail] = await connection.execute(
+      "SELECT * FROM student WHERE Email = ?",
+      [email]
+    );
+
+    if (existingEmail.length > 0) {
+      await connection.rollback();
+      return res.status(409).json({ message: "Email already exists" });
+    }
+
+    // Insert student
+    await connection.execute(
+      "update student set Name=?, Email=?, Department_id=?, Date_of_Birth=?, Gender=?, Mobile_number=? where student_id=?",
+      [name, email, department, dob, gender, mobile, studentId]
+    );
+
+    // await connection.execute(updateQuery, [
+    //   name,
+    //   email,
+    //   department,
+    //   dob,
+    //   gender,
+    //   mobile,
+    // ]);
+
+    // Commit transaction
+    await connection.commit();
+    return res.status(200).json({ message: "Student updated successfully!" });
+  } catch (error) {
+    // Rollback if any error occurs
+    if (connection) await connection.rollback();
+    console.error("Error while updating student:", error);
+    return res.status(500).json({ message: "Internal Server Error", error });
+  } finally {
+    // Release the connection
+    if (connection) connection.release();
   }
-}
+};

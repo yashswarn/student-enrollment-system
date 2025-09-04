@@ -52,7 +52,7 @@
             Action
           </button>
           <mat-menu #menu7="matMenu">
-            <button class="btn btn-success" mat-menu-item>Edit</button>
+            <button class="btn btn-success" mat-menu-item (click)="UpdateStudent(student.Student_id)">Edit</button>
             <button class="btn btn-success" (click)="deleteStudent(student.Student_id)" mat-menu-item >
               Delete
             </button>

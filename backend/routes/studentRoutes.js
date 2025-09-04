@@ -11,5 +11,7 @@ router.get('/for-marks',studentController.getStudentsOfCourse)
 router.get('/count',studentController.getCount);
 router.get('/getsearchedname',studentController.getSearchedName);
 router.delete('/deletestudent/:Student_id',studentController.deleteStudent);
+router.get('/getstudentbyid/:studentId',studentController.getStudentById)
+router.put('/update/:studentId',studentController.updateStudent)
 
 module.exports=router;
