@@ -1,5 +1,7 @@
-<div class="bg-info bg-gradient">
-  <div class="home pt-5">
+<!-- <app-navbar (scrollSection)="scrollToSection($event)"></app-navbar> -->
+
+<div>
+  <div #home class="home pt-5">
     <!-- <h2 class="pt-3 mb-5 text-center">Student Enrollment System</h2> -->
     <div class="d-flex gap-5 mx-5 pt-4">
       <div class="w-50 d-flex align-items-center px-2">
@@ -29,14 +31,16 @@
     </div>
   </div>
 
-  <div class="about mb-5">
+  <div #about class="about mb-5">
     <h3 class="text-center mb-5">About Us</h3>
     <!-- about parent div  -->
-    <div class="mx-5 gap-5">
-      <div class="d-flex gap-5 mb-4">
-        <div class="w-50 bg-white rounded-1 px-4 py-3">
-          <h6 class="bg-black text-white rounded-5 ps-3 py-2">Who We Are</h6>
-          <div>
+    <div class="mx-5 gap-5 pt-5">
+      <div class="d-flex gap-5 mb-5">
+        <div class="w-50 bg-white rounded-4 px-4 py-3 text">
+          <h6 class="bg-black text-white rounded-5 ps-3 py-2">
+            About Student Enrollment System
+          </h6>
+          <div class="ps-3">
             The Student Enrollment System is a web-based application designed to
             simplify and digitalize the management of students, courses, and
             academic processes. Our mission is to provide institutions with a
@@ -44,90 +48,90 @@
             productivity and reduces manual workload.
           </div>
         </div>
+
         <div class="w-50">
           <div class="d-flex justify-content-center align-items-center h-100">
             <img
-              src="assets/jsons/wht_we_do.webp"
-              class="rounded w h-75"
+              src="assets/jsons/enrollment_image.jpg"
+              class="rounded-3 w-50"
               alt="image"
             />
           </div>
         </div>
       </div>
 
-      <div class="d-flex gap-5 mb-4">
+      <div class="d-flex gap-5 mb-5 pt-5">
         <div class="w-50">
           <div class="d-flex justify-content-center align-items-center h-100">
             <img
-              src="assets/jsons/who_we_are.png"
-              class="rounded w h-75"
+              src="assets/jsons/what_we_do.png"
+              class="rounded-3 w-50"
               alt="image"
             />
           </div>
         </div>
-        <div class="w-50 bg-white rounded-1 px-4 py-3">
-          <h6 class="bg-black text-white rounded-5 ps-3 py-2">Who We Are</h6>
-          <div>
-            The Student Enrollment System is a web-based application designed to
-            simplify and digitalize the management of students, courses, and
-            academic processes. Our mission is to provide institutions with a
-            secure, efficient, and user-friendly platform that enhances
-            productivity and reduces manual workload.
+        <div class="w-50 bg-white rounded-4 px-4 py-3 text">
+          <h6 class="bg-black text-white rounded-5 ps-3 py-2">Our Vision</h6>
+          <div class="ps-3">
+            To provide an intelligent, reliable, and modern platform that
+            enhances the educational enrollment process, making it more
+            transparent, accessible, and efficient for everyone involved.
           </div>
         </div>
       </div>
 
-      <div class="d-flex gap-5 mb-4">
-        <div class="w-50 bg-white rounded-1 px-4 py-3">
-          <h6 class="bg-black text-white rounded-5 ps-3 py-2">Who We Are</h6>
-          <div>
-            The Student Enrollment System is a web-based application designed to
-            simplify and digitalize the management of students, courses, and
-            academic processes. Our mission is to provide institutions with a
-            secure, efficient, and user-friendly platform that enhances
-            productivity and reduces manual workload.
+      <div class="d-flex gap-5 mb-5 pt-5">
+        <div class="w-50 bg-white rounded-4 px-4 py-3 text">
+          <h6 class="bg-black text-white rounded-5 ps-3 py-2">Purpose</h6>
+          <div class="ps-3">
+            The system reduces paperwork, minimizes errors, and saves time by
+            replacing traditional manual enrollment with an automated digital
+            solution. It helps institutions manage admissions, track student
+            details, and improve overall efficiency.
           </div>
         </div>
         <div class="w-50">
           <div class="d-flex justify-content-center align-items-center h-100">
             <img
-              src="assets/jsons/who_we_are.png"
-              class="rounded w h-75"
+              src="assets/jsons/en"
+              class="rounded-3 w-50"
               alt="image"
             />
           </div>
         </div>
       </div>
 
-      <div class="d-flex gap-5 mb-4">
+      <div class="d-flex gap-5 pt-5 mb-4">
         <div class="w-50">
           <div class="d-flex justify-content-center align-items-center h-100">
             <img
-              src="assets/jsons/who_we_are.png"
-              class="rounded w h-75"
+              src="assets/jsons/what_we_do.png"
+              class="rounded-3 w-50"
               alt="image"
             />
           </div>
         </div>
-        <div class="w-50 bg-white rounded-1 px-4 py-3">
-          <h6 class="bg-black text-white rounded-5 ps-3 py-2">Who We Are</h6>
-          <div>
-            The Student Enrollment System is a web-based application designed to
-            simplify and digitalize the management of students, courses, and
-            academic processes. Our mission is to provide institutions with a
-            secure, efficient, and user-friendly platform that enhances
-            productivity and reduces manual workload.
+        <div class="w-50 bg-white rounded-4 px-4 py-3 text">
+          <h6 class="bg-black text-white rounded-5 ps-3 py-2">
+            Future Enhancements
+          </h6>
+          <div class="ps-3">
+            In future versions, the system can be integrated with advanced
+            features such as online payment gateways, analytics dashboards,
+            AI-based student recommendations, and mobile app support. These
+            enhancements will further improve the efficiency of academic
+            management and provide a smarter learning ecosystem.
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="key-features mx-5">
-    <h3 class="text-center mb-5">Key Features</h3>
+  <div #keyfeatures class="keyfeatures mx-5 mb-5">
+    <h3 class="text-center mb-5 pt-5">Key Features</h3>
     <div>
-      <div class="d-flex gap-5 mb-5">
-        <div class="left w-50 bg-white rounded-top-5 rounded-bottom">
+      <div class="d-flex gap-5 mb-5 pt-5">
+        <div class="text1 left w-50 bg-white rounded-top-5 rounded-bottom">
           <div class="">
             <h6 class="bg-black text-white rounded-5 ps-3 py-2">
               1 | Role-Based Access Control
@@ -139,64 +143,64 @@
           </div>
         </div>
 
-        <div class="left w-50 bg-white rounded-top-5 rounded-bottom">
+        <div class="text1 left w-50 bg-white rounded-top-5 rounded-bottom">
           <div class="">
             <h6 class="bg-black text-white rounded-5 ps-3 py-2">
-              1 | Role-Based Access Control
+              2 | Student Registration
             </h6>
             <p class="px-3">
-              Secure authentication for Admins, Teachers, and Students with
-              personalized dashboards.
+              Students can easily register online, create profiles, and manage
+              personal academic information.
             </p>
           </div>
         </div>
 
-        <div class="left w-50 bg-white rounded-top-5 rounded-bottom">
+        <div class="text1 left w-50 bg-white rounded-top-5 rounded-bottom">
           <div class="">
             <h6 class="bg-black text-white rounded-5 ps-3 py-2">
-              1 | Role-Based Access Control
+              3 | Course Enrollment
             </h6>
             <p class="px-3">
-              Secure authentication for Admins, Teachers, and Students with
-              personalized dashboards.
+              Learners can browse available courses, view details, and enroll
+              quickly without manual paperwork.
             </p>
           </div>
         </div>
       </div>
 
-      <div class="d-flex gap-5 mb-5">
-        <div class="left w-50 bg-white rounded-top-5 rounded-bottom">
+      <div class="d-flex gap-5 mb-5 pt-">
+        <div class="text1 left w-50 bg-white rounded-top-5 rounded-bottom">
           <div class="">
             <h6 class="bg-black text-white rounded-5 ps-3 py-2">
-              1 | Role-Based Access Control
+              4 | Database Management
             </h6>
             <p class="px-3">
-              Secure authentication for Admins, Teachers, and Students with
-              personalized dashboards.
+              Centralized storage system maintains student records, courses, and
+              enrollments with high accuracy.
             </p>
           </div>
         </div>
 
-        <div class="left w-50 bg-white rounded-top-5 rounded-bottom">
+        <div class="text1 left w-50 bg-white rounded-top-5 rounded-bottom">
           <div class="">
             <h6 class="bg-black text-white rounded-5 ps-3 py-2">
-              1 | Role-Based Access Control
+              5 | User-Friendly Interface
             </h6>
             <p class="px-3">
-              Secure authentication for Admins, Teachers, and Students with
-              personalized dashboards.
+              Simple and intuitive design makes navigation easy for students,
+              teachers, and administrators.
             </p>
           </div>
         </div>
 
-        <div class="left w-50 bg-white rounded-top-5 rounded-bottom">
+        <div class="text1 left w-50 bg-white rounded-top-5 rounded-bottom">
           <div class="">
             <h6 class="bg-black text-white rounded-5 ps-3 py-2">
-              1 | Role-Based Access Control
+                6  |  Admin Control Panel 
             </h6>
             <p class="px-3">
-              Secure authentication for Admins, Teachers, and Students with
-              personalized dashboards.
+              Enables administrators to manage teachers,
+              students, and courses through a powerful dashboard.
             </p>
           </div>
         </div>
@@ -204,20 +208,20 @@
     </div>
   </div>
 
-  <div class="contact">
-    <h3 class="text-center mb-5">Contact us</h3>
+  <div #contact class="contact">
+    <h3 class="text-center mb-5 pt-5">Contact us</h3>
     <div class="d-flex">
       <div class="w-5">
         <img src="assets/jsons/contact_us.webp" class="img-fluid" alt="" />
       </div>
 
-      <div
-        class="d-flex justify-content-center w-50"
-      >
-        <div class="d-flex flex-column justify-content-center bg-black w-100 text-white px-5 py-3">
+      <div class="d-flex justify-content-center w-50">
+        <div
+          class="d-flex flex-column justify-content-center bg-black w-100 text-white px-5 py-3"
+        >
           <p class="d-flex gap-2">
             <span>
-              <img src="assets/jsons/email.png" alt="fsdf">
+              <img src="assets/jsons/email.png" alt="fsdf" />
             </span>
             <a
               href="mailto:yash27827@gmail.com"
@@ -227,7 +231,7 @@
           </p>
           <p class="d-flex gap-2">
             <span>
-              <img src="assets/jsons/call.png" alt="fsdf">
+              <img src="assets/jsons/call.png" alt="fsdf" />
             </span>
             <a
               href="https://wa.me/+918005507468"

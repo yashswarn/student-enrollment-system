@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+
 
 @Component({
   selector: 'app-welcome',
-  imports: [],
+  standalone:true,
+  imports:[],
   templateUrl: './welcome.html',
-  styleUrl: './welcome.css'
+  styleUrl: './welcome.css',
 })
 export class Welcome {
-
+  
 }

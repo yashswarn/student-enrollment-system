@@ -12,11 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Auth } from './services/auth';
 // import { BrowserModule } from '@angular/platform-browser';
 import { NgChartsModule } from 'ng2-charts';
+import { Navbar } from './college_management_system/navbar/navbar';
 
 @Component({
   selector: 'app-root',
   standalone:true,
-  imports: [NgChartsModule,CommonModule, RouterModule,RouterOutlet,MatMenuModule,MatButtonModule,MatIconModule,ReactiveFormsModule],
+  imports: [Navbar, NgChartsModule,CommonModule, RouterModule,RouterOutlet,MatMenuModule,MatButtonModule,MatIconModule,ReactiveFormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -26,7 +27,7 @@ export class App {
 
   constructor(public authService:Auth){}
 
-  logout(){
-    this.authService.logout();
-  }
+  // logout(){
+  //   this.authService.logout();
+  // }
 }

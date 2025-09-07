@@ -12,6 +12,7 @@ import { StudentService } from '../../services/student.service';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { Auth } from '../../services/auth';
+import { ActivatedRoute } from '@angular/router';
 
 declare var bootstrap: any;
 
@@ -31,12 +32,16 @@ export class Login {
   isLoggedIn=false;
   isShowPassword = false;
   submittedLogin: any[] = [];
+  role:string='';
+  email:string='';
+  password:string='';
 
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
     private router: Router,
-    private authService: Auth
+    private authService: Auth,
+    private route:ActivatedRoute
   ) {
     this.loginForm = fb.group({
       email: [
@@ -53,19 +58,13 @@ export class Login {
     });
   }
 
-  // ngOnInit() {
-  //   if (this.authService.isLoggedIn()) {
-  //     const roles = this.authService.getUserRoles();
-
-  //     if (roles.includes('admin')) {
-  //       // navigate to admin panel
-  //       this.router.navigate(['/studentenrollment']);
-  //     } else if (roles.includes('student')) {
-  //       // navigate to student panel
-  //       this.router.navigate(['/registerstudent']);
-  //     }
-  //   }
-  // }
+  ngOnInit() {
+    this.route.queryParams.subscribe(params=>{
+      this.role=params['role'] || 'user';
+      this.setDummyCredential(this.role);
+    })
+    
+  }
 
   get f() {
     return this.loginForm.controls;
@@ -134,6 +133,41 @@ export class Login {
           this.isSubmitted = false;
         },
       });
+    }
+  }
+
+  setDummyCredential(role:string){
+    switch(role){
+      case 'admin':
+        this.loginForm.patchValue({
+          email:'vinod.gupta@gmail.com',
+          password:'vinod@123'
+        })
+        break;
+
+      case 'teacher':
+        this.loginForm.patchValue({
+
+          email:'arvind.singh.chaudhary@gmail.com',
+          password:'Arvind@123'
+        })
+        break;
+
+      case 'department admin':
+        this.loginForm.patchValue({
+
+          email:'vikas.soni@gmail.com',
+          password:'Vikas@123'
+        })
+        break;
+
+      default:
+        this.loginForm.patchValue({
+
+          email:'',
+          password:''
+        })
+
     }
   }
 }

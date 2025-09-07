@@ -332,16 +332,16 @@
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<div>
+<!-- <div>
   <nav class="p-2 bg-black  bg-light border-bottom gap-3">
     <div class="d-flex justify-content-end ">
       <div>
         <div>
-          <button class="text-white" mat-button [routerLink]="'/home'">Home</button>
-          <button class="text-white" mat-button [routerLink]="'/dashboard'">Dashboard</button>
-          <button class="text-white" mat-button [routerLink]="'/about'">About</button>
-          <button class="text-white" mat-button [routerLink]="'/features'">Features</button>
-          <button class="text-white" mat-button [routerLink]="'/contact'">Contact</button>
+          <button class="text-white" mat-button  (click)="landing.scrollToSection('home')">Home</button>
+          <button class="text-white" mat-button>Dashboard</button>
+          <button class="text-white" mat-button  (click)="landing.scrollToSection('about')">About</button>
+          <button class="text-white" mat-button  (click)="landing.scrollToSection('key-features')">Features</button>
+          <button class="text-white" mat-button  (click)="landing.scrollToSection('contact')">Contact</button>
         </div>
       </div>
 
@@ -351,7 +351,9 @@
             Login / Register
           </button>
           <mat-menu #menu5="matMenu">
-            <button mat-menu-item [routerLink]="'/loginpage'">Login</button>
+            <button mat-menu-item [routerLink]="'/loginpage'" [queryParams]="{role:'admin'}">Login As Admin</button>
+            <button mat-menu-item [routerLink]="'/loginpage'" [queryParams]="{role:'teacher'}">Login As Teacher</button>
+            <button mat-menu-item [routerLink]="'/loginpage'" [queryParams]="{role:'department admin'}">Login As Department Admin</button>
             <button mat-menu-item [routerLink]="'/registerpage'">
               Register
             </button>
@@ -367,9 +369,11 @@
       </div>
     </div>
   </nav>
-</div>
+</div> -->
 
 <!-- the below line will show duplicacy -->
 <!-- <app-department-filter></app-department-filter> -->
 <!-- <app-navbar></app-navbar> -->
+<!-- <app-navbar></app-navbar> -->
+<app-navbar (scrollSection)="scrollToSection($event)"></app-navbar>
 <router-outlet></router-outlet>

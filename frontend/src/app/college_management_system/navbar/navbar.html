@@ -1,32 +1,38 @@
-<!-- <div>
-  <nav class="p-2 bg-light border-bottom d-flex justify-content-between gap-3">
-    <div>
-      <button mat-button [matMenuTriggerFor]="menu1">Student Management</button>
-      <mat-menu #menu1="matMenu">
-        <button mat-menu-item [routerLink]="'/registerstudent'">
-          Student Registration
-        </button>
-        <button mat-menu-item [routerLink]="'/viewstudents'">
-          View Students
-        </button>
-      </mat-menu>
+<div>
+  <nav class="p-2 bg-black  bg-light border-bottom gap-3">
+    <div class="d-flex justify-content-end ">
+      <div>
+        <div>
+          <button class="text-white" mat-button  (click)="scrollToSection('home')">Home</button>
+          <button class="text-white" mat-button [routerLink]="'/dashboard'">Dashboard</button>
+          <button class="text-white" mat-button  (click)="scrollToSection('about')">About</button>
+          <button class="text-white" mat-button  (click)="scrollToSection('keyfeatures')">Features</button>
+          <button class="text-white" mat-button  (click)="scrollToSection('contact')">Contact</button>
+        </div>
+      </div>
 
-      <button mat-button [matMenuTriggerFor]="menu2">
-        Enrollment Management
-      </button>
-      <mat-menu #menu2="matMenu">
-        <button mat-menu-item [routerLink]="'/studentenrollment'">
-          Enroll Students
-        </button>
-        <button mat-menu-item [routerLink]="'/enrolledstudentsmarks'">
-          Record Marks
-        </button>
-      </mat-menu>
+      <div>
+        <div *ngIf="!authService.isLoggedIn()">
+          <button class="text-white" mat-button [matMenuTriggerFor]="menu5">
+            Login / Register
+          </button>
+          <mat-menu #menu5="matMenu">
+            <button mat-menu-item [routerLink]="'/loginpage'" [queryParams]="{role:'admin'}">Login As Admin</button>
+            <button mat-menu-item [routerLink]="'/loginpage'" [queryParams]="{role:'teacher'}">Login As Teacher</button>
+            <button mat-menu-item [routerLink]="'/loginpage'" [queryParams]="{role:'department admin'}">Login As Department Admin</button>
+            <button mat-menu-item [routerLink]="'/registerpage'">
+              Register
+            </button>
+          </mat-menu>
+        </div>
 
-      <button mat-button [matMenuTriggerFor]="menu3">Help</button>
-      <mat-menu #menu3="matMenu">
-        <button mat-menu-item [routerLink]="'/help'">Help</button>
-      </mat-menu>
+        <div *ngIf="authService.isLoggedIn()">
+          <button mat-button [matMenuTriggerFor]="menu7">Logout</button>
+          <mat-menu #menu7="matMenu">
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </mat-menu>
+        </div>
+      </div>
     </div>
   </nav>
-</div> -->
+</div>
