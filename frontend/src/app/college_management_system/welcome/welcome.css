@@ -1,5 +1,8 @@
-.home ,.contact,.key-features{
+.contact,.keyfeatures{
     height: 100vh;
+}
+.home{
+    height: 80vh;
 }
 .text{
     border: 1px solid black;
@@ -9,6 +12,4 @@
     border-bottom: 1px solid black;
     border-right: 1px solid black;
     border-left: 1px solid black;
-
-
 }

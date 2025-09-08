@@ -1,7 +1,6 @@
-<!-- <app-navbar (scrollSection)="scrollToSection($event)"></app-navbar> -->
-
-<div>
-  <div #home class="home pt-5">
+<div class="w-100 pt-5">
+  <section id="home" class="pt-5">
+    <div class="home pt-5">
     <!-- <h2 class="pt-3 mb-5 text-center">Student Enrollment System</h2> -->
     <div class="d-flex gap-5 mx-5 pt-4">
       <div class="w-50 d-flex align-items-center px-2">
@@ -31,7 +30,10 @@
     </div>
   </div>
 
-  <div #about class="about mb-5">
+  </section>
+
+  <section id="about" class="pt-5">
+    <div class="about mb-5 pt-5">
     <h3 class="text-center mb-5">About Us</h3>
     <!-- about parent div  -->
     <div class="mx-5 gap-5 pt-5">
@@ -93,7 +95,7 @@
         <div class="w-50">
           <div class="d-flex justify-content-center align-items-center h-100">
             <img
-              src="assets/jsons/en"
+              src="assets/jsons/enrollment.jpg"
               class="rounded-3 w-50"
               alt="image"
             />
@@ -126,8 +128,10 @@
       </div>
     </div>
   </div>
+  </section>
 
-  <div #keyfeatures class="keyfeatures mx-5 mb-5">
+  <section id="keyfeatures" class="pt-5">
+    <div class="keyfeatures mx-5 mb-5">
     <h3 class="text-center mb-5 pt-5">Key Features</h3>
     <div>
       <div class="d-flex gap-5 mb-5 pt-5">
@@ -207,8 +211,10 @@
       </div>
     </div>
   </div>
+  </section>
 
-  <div #contact class="contact">
+  <section id="contact"  class="pt-5">
+    <div class="contact">
     <h3 class="text-center mb-5 pt-5">Contact us</h3>
     <div class="d-flex">
       <div class="w-5">
@@ -243,6 +249,7 @@
       </div>
     </div>
   </div>
+  </section>
 
   <footer class="bg-black text-white text-center py-2">
     © All Rights Reserved | Privacy Policy

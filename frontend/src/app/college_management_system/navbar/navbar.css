@@ -1,0 +1,8 @@
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* taki content ke upar dikh sake */
+  background-color: #111; /* apne navbar ka background set karna zaruri hai */
+}

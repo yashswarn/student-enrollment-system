@@ -1,4 +1,5 @@
-<div class="rounded border shadow mt-2 bg-white container p-4 w-75">
+<div class="pt-5">
+  <div class="marks rounded border shadow mt-2 bg-white container p-4">
   <h4 class=" mt-2">Assign Marks to Enrolled Students</h4>
   <hr />
   <div class="mb-3">
@@ -8,7 +9,7 @@
     </label>
     <select
       id="dept1"
-      class="form-select w-50"
+      class="form-select w-75"
       [(ngModel)]="selectedDept1"
       (change)="onDepartmentChange()"
       name="department"
@@ -33,7 +34,7 @@
     </label>
     <select
       id="course"
-      class="form-select w-50"
+      class="form-select w-75"
       [(ngModel)]="selectedCourse"
       required
       #courseRef="ngModel"
@@ -56,7 +57,7 @@
     </label>
     <select
       id="dept2"
-      class="form-select w-50"
+      class="form-select w-75"
       [(ngModel)]="selectedDept2"
       name="department"
       required
@@ -232,4 +233,6 @@
       </div>
     </div>
   </div>
+</div>
+
 </div>

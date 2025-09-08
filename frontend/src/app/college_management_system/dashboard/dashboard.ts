@@ -106,6 +106,29 @@ export class Dashboard implements OnInit {
           },
         ],
       };
+
+    //  this.barChartData.labels = data.map((d: any) => d.course_name);
+    // this.barChartData.datasets[0].data = data.map((d: any) => d.count);
+
+    // // ✅ Background color dynamically set
+    // this.barChartData.datasets[0].backgroundColor = data.map(() => 
+    //   this.getRandomColor()
+    // ); 
+
+
     });
   }
+
+  // getRandomColor(): string {
+  // const colors = [
+  //   'rgba(75, 192, 192, 0.6)',
+  //   'rgba(255, 99, 132, 0.6)',
+  //   'rgba(54, 162, 235, 0.6)',
+  //   'rgba(255, 206, 86, 0.6)',
+  //   'rgba(153, 102, 255, 0.6)',
+  //   'rgba(255, 159, 64, 0.6)'
+  // ];
+  // return colors[Math.floor(Math.random() * colors.length)];
+  
 }
+

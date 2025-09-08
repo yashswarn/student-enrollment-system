@@ -1,4 +1,5 @@
-<div class="d-flex justify-content-center gap-5 mt-5 ">
+<div class="d-flex flex-column pt-5">
+  <div class="d-flex justify-content-center gap-5 pt-5  position-">
   <mat-card class="text-white w-25" *ngIf="totalStudents">
     <mat-card-header>
       <mat-card-title> Total students </mat-card-title>
@@ -27,11 +28,12 @@
   </mat-card>
 </div>
 
-<div class="mt-5">
+<div class="mt-5 w-75 d-flex justify-content-center h-100 ">
   <canvas baseChart
   [data]="barChartData"
   [options]="barChartOptions"
   [type]="barChartType"
   >
   </canvas>
+</div>
 </div>
