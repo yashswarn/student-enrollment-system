@@ -4,6 +4,8 @@
       <div>
         <div>
           <button class="text-white" mat-button  (click)="scrollToSection('home')">Home</button>
+          <button class="text-white" mat-button *ngIf="hasRole('admin')"  [routerLink]="'/viewstudents'">View Students</button>
+          <button class="text-white" mat-button *ngIf="hasRole('admin')"  [routerLink]="'/registerstudent'">Register Student</button>
           <button class="text-white" mat-button [routerLink]="'/dashboard'">Dashboard</button>
           <button class="text-white" mat-button  (click)="scrollToSection('about')">About</button>
           <button class="text-white" mat-button  (click)="scrollToSection('keyfeatures')">Features</button>

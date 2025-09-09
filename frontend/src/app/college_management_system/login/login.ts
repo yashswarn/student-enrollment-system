@@ -96,6 +96,7 @@ export class Login {
             this.router.navigate(['/loginpage']);
           }
           const roles = decoded.role;
+          this.authService.setUserRoles(roles);
           const course=decoded.course;
 
           console.log("roles and course are->",roles,course);
@@ -153,7 +154,7 @@ export class Login {
         })
         break;
 
-      case 'department admin':
+      case 'department_admin':
         this.loginForm.patchValue({
 
           email:'vikas.soni@gmail.com',

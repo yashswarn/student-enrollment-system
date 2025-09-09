@@ -12,11 +12,12 @@ declare var bootstrap: any;
 import { HttpClient } from '@angular/common/http';
 import { StudentService } from '../../services/student.service';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student',
   standalone: true,
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './student.html',
   styleUrls: ['./student.css'],
 })
@@ -36,14 +37,24 @@ export class Student implements OnInit {
   DEPARTMENT_ID: number = 0;
   studentId: number | null = null;
   isEdit: boolean = false;
+  role:string='';
 
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private routes:Router
   ) {}
 
   ngOnInit() {
+
+    this.route.queryParams.subscribe((params:any)=>{
+      this.role=params['role'];
+      if (this.role==='admin') {
+        this.routes.navigate(["'/viewstudents'"])
+      }   
+    })
+
     this.studentId = this.route.snapshot.params['id'];
     console.log('student id at frontend angular is->', this.studentId);
 

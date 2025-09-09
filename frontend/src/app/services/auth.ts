@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,9 @@ import { Router } from '@angular/router';
 export class Auth {
 
   constructor(private router:Router) {  }
+
+  private rolesSubject=new BehaviorSubject<string[]>(this.getUserRoles());
+  roles$=this.rolesSubject.asObservable();
 
   getToken():string | null{
     return sessionStorage.getItem('token');
@@ -31,12 +35,26 @@ export class Auth {
 
 
   getUserRoles():string[]{
-    const decoded=this.getDecodedToken();
-    return decoded?.role || [];
+    // const decoded=this.getDecodedToken();
+    // return decoded?.role || [];
+
+    const roles = sessionStorage.getItem('roles');
+  return roles ? JSON.parse(roles) : [];
+  }
+
+  getRoles():string[]{
+    return this.rolesSubject.value;
+  }
+
+  setUserRoles(roles:string[]):void{
+    sessionStorage.setItem('roles',JSON.stringify(roles));
+    this.rolesSubject.next(roles);
   }
 
   logout(){
-    sessionStorage.removeItem('token');
+    // sessionStorage.removeItem('token');
+    sessionStorage.clear();
+    this.rolesSubject.next([]);
     this.router.navigate(['/loginpage'])
   }
 
