@@ -37,9 +37,8 @@ export class Navbar implements OnInit {
   @Output() scrollSection = new EventEmitter<string>();
 
   roles: string[] = [];
-  isViewStudents:boolean=false;
 
-  constructor(public authService: Auth, private router: Router) {}
+  constructor(public authService: Auth, public router: Router) {}
 
   ngOnInit() {
     this.authService.roles$.subscribe(roles=>{
@@ -48,6 +47,9 @@ export class Navbar implements OnInit {
     })
     // this.roles = this.authService.getUserRoles();
   }
+
+  isViewStudents:boolean=false;
+
 
   hasRole(role: string): boolean {
     console.log('role at navbar.ts file is->', role);
@@ -61,7 +63,7 @@ export class Navbar implements OnInit {
   logout() {
     this.authService.logout();
     this.roles=[];
-    this.isViewStudents=false;
+    // this.isViewStudents=false;
   }
 
   scrollToSection(sectionId: string) {

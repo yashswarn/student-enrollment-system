@@ -110,9 +110,9 @@ export class Student implements OnInit {
           ),
         ],
       ],
-      department: ['', Validators.required],
+      department: [null, Validators.required],
       mobile: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
-      gender: ['', Validators.required],
+      gender: [null, Validators.required],
       dob: ['', [Validators.required, this.AgeRangeValidator(16, 60)]],
     });
   }

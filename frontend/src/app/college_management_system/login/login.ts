@@ -154,7 +154,7 @@ export class Login {
         })
         break;
 
-      case 'department_admin':
+      case 'department admin':
         this.loginForm.patchValue({
 
           email:'vikas.soni@gmail.com',

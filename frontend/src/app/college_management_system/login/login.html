@@ -36,14 +36,14 @@
           <input
             id="password"
             [type]="isShowPassword?'text':'password'"
-            class="form-control"
+            class="form-control loginPassword"
             formControlName="password"
             [ngClass]="{'is-invalid':isSubmitted && f['password'].errors}"
             autocomplete="current-password"
             />
           <button
             type="button"
-            class="btn position-relative"
+            class="btn passwordHideBtn"
             (click)="togglePassword()"
           >
             <mat-icon

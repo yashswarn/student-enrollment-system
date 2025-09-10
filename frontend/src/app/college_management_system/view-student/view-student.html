@@ -1,8 +1,8 @@
-<div>
-  <h2 class="fw-bold text-center mb-4 mt-4">Students List</h2>
+<div class="pt-3 mt-5 pb-4">
+  <h2 class="fw-bold text-center mb-4 ms-">Students List</h2>
   <!-- <hr /> -->
 
-  <div class="mb-4">
+  <div class="mb-4 ms-2">
     <label for="search" class="form-label">Search by name: </label>
     <input
       type="search"
@@ -87,7 +87,7 @@
     </tbody>
   </table>
 
-  <div>
+  <div class="ms-2 mb-4">
     <button class="btn btn-success" (click)="prevPage()" [disabled]="currentPage===1">Prev</button>
     <span> Page {{currentPage}} of {{totalPages}} </span>
     <button class="btn btn-success" (click)="nextPage()" [disabled]="currentPage===totalPages">Next</button>
