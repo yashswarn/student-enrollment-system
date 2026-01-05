@@ -29,6 +29,7 @@ export class Student implements OnInit {
 
   studentForm!: FormGroup;
   isSubmitted = false;
+  isUpdated=false;
   minDate: string = '';
   maxDate: string = '';
   submittedStudents: any[] = [];
@@ -180,47 +181,6 @@ export class Student implements OnInit {
     }
   }
 
-  // onSubmit() {
-  //   if (this.studentForm.valid) {
-  //     this.studentService.addStudents(this.studentForm.value).subscribe({
-  //       next: () => {
-  //         console.log('student data saved in db'),
-  //         const dob = this.studentForm.get('dob')?.value;
-
-  //     if (dob) {
-  //       const formatDob = this.formatDateToIndian(dob);
-  //       console.log('indian dob is->', formatDob);
-  //       this.studentForm.get('dob')?.setValue(formatDob);
-  //     } else {
-  //       console.log('dob is missing');
-  //     }
-
-  //     // trim the name
-  //     const trimName = this.studentForm.value.name.trim();
-  //     this.studentForm.patchValue({ name: trimName });
-
-  //     console.log('student registered:', this.studentForm.value);
-  //     console.log('type of department->', typeof this.departments);
-  //     this.submittedStudents.push(this.studentForm.value);
-  //     console.log('submittted student is->', this.submittedStudents);
-  //     this.isSubmitted = true;
-  //     // alert("Student registered!")
-  //     const modal = new bootstrap.Modal(this.successModal.nativeElement);
-  //     modal.show();
-
-  //     this.studentForm.reset();
-  //   }
-
-  //       error: (err: any) =>{
-  //         console.error('error while saving student data', err),
-  //          alert('all fields are mandatory');
-  //     this.studentForm.markAllAsTouched();
-  //     return;
-  //       }
-  //     )};
-
-  // }
-
   // helper for html access
 
   onSubmit() {
@@ -247,6 +207,10 @@ export class Student implements OnInit {
             // Show success modal
             const modal = new bootstrap.Modal(this.updateStudentModal.nativeElement);
             modal.show();
+
+            setTimeout(()=>{
+              modal.hide()
+            },2000)
             
             this.submittedStudents.push(this.studentForm.value);
             this.studentForm.reset();
@@ -261,18 +225,13 @@ export class Student implements OnInit {
               this.alreadyRegisteredModal.nativeElement
             );
             modal.show();
+            setTimeout(()=>{
+              modal.hide()
+            },2000)
             // this.studentForm.reset();
           },
         });
     } else if (this.studentForm.valid) {
-      // Format DOB
-      // const dob = this.studentForm.get('dob')?.value;
-      // if (dob) {
-      //   const formatDob = this.formatDateToIndian(dob);
-      //   this.studentForm.get('dob')?.setValue(formatDob);
-      // } else {
-      //   console.log('DOB is missing');
-      // }
 
       // Trim name
       const trimName = this.studentForm.value.name.trim();
@@ -289,6 +248,10 @@ export class Student implements OnInit {
           const modal = new bootstrap.Modal(this.successModal.nativeElement);
           modal.show();
 
+          setTimeout(()=>{
+            modal.hide();
+          },2000)
+
           this.studentForm.reset();
           this.isSubmitted = false;
         },
@@ -301,6 +264,10 @@ export class Student implements OnInit {
             this.alreadyRegisteredModal.nativeElement
           );
           modal.show();
+          
+          setTimeout(()=>{
+            modal.hide()
+          },1000)
           this.studentForm.reset();
         },
       });

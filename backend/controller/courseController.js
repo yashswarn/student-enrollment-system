@@ -14,13 +14,6 @@ exports.getCourses = async (req, res) => {
     return res.status(400).send("server error");
   }
 
-  // db.query(sql,[departmentId],(error,result)=>{
-  //     if (error) {
-  // console.error("departmentId is missing",error);
-  // return res.status(400).send("server error");
-  //     }
-  //     res.json(result);
-  // })
 };
 
 exports.getCourseCount=async(req,res)=>{

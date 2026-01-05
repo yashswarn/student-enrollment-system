@@ -1,41 +1,40 @@
-<div class="pt-3 mt-5 pb-4">
-  <h2 class="fw-bold text-center mb-4 ms-">Students List</h2>
-  <!-- <hr /> -->
+<div class="view-student-div pt-3 mt-5 pb-4">
+  <div class="d-flex flex-column-reverse gap-2">
+    <div class="d-flex flex-column flex-sm-row gap-2 ms-2">
+      <div class="d-flex">
+        <label for="search" class="form-label">Search by name: </label>
+      <input
+        type="search"
+        id="search"
+        class="form-input"
+        [(ngModel)]="searchedName"
+        (ngModelChange)="onSearchChange($event)"
+      />
+      </div>
+      <div class="">
 
-  <div class="mb-4 ms-2">
-    <label for="search" class="form-label">Search by name: </label>
-    <input
-      type="search"
-      id="search"
-      class="form-input"
-      [(ngModel)]="searchedName"
-      (ngModelChange)="onSearchChange($event)"
-    />
-
-    <!-- <label for="email" class="form-label">Search by email: </label>
-    <input
-      type="email"
-      id="email"
-      class="form-input"
-      [(ngModel)]="searchedEmail"
-      (ngModelChange)="onSearchChange($event)"
-    /> -->
-    <button class="btn btn-primary btn-success ms-3" (click)="onSearch()">Search</button>
+        <button class="btn btn-primary btn-success" (click)="onSearch()">
+          Search
+        </button>
+      </div>
+    </div>
+    <h2 class="fw-bold text-center mb- ms-">Students List</h2>
   </div>
 
-  <table class="table table-scripted table-bordered" *ngIf="viewStudents && !isSearch">
+  <table
+    class="table table-scripted table-bordered"
+    *ngIf="viewStudents && !isSearch"
+  >
     <thead class="thead-dark">
       <tr>
         <th class="text-center">Sr No</th>
         <th>Name</th>
         <th>Email</th>
         <th class="text-center">Mobile No</th>
-        <th>Department_Id</th>
+        <th>Department</th>
         <th>Gender</th>
         <th>DOB</th>
-        <th class="text-center">
-          Options
-        </th>
+        <th class="text-center">Options</th>
       </tr>
     </thead>
     <tbody>
@@ -44,16 +43,30 @@
         <td>{{student.Name}}</td>
         <td>{{student.Email}}</td>
         <td class="text-center">{{student.Mobile_number}}</td>
-        <td>{{student.Department_id}}</td>
+        <td>{{student.DEPARTMENT_NAME}}</td>
         <td>{{student.Gender}}</td>
         <td>{{student.Date_of_Birth}}</td>
         <td class="text-center">
-          <button class="text-white btn btn-success bg-black" mat-button [matMenuTriggerFor]="menu7">
+          <button
+            class="text-white btn btn-success bg-black"
+            mat-button
+            [matMenuTriggerFor]="menu7"
+          >
             Action
           </button>
           <mat-menu #menu7="matMenu">
-            <button class="btn btn-success" mat-menu-item (click)="UpdateStudent(student.Student_id)">Edit</button>
-            <button class="btn btn-success" (click)="deleteStudent(student.Student_id)" mat-menu-item >
+            <button
+              class="btn btn-success"
+              mat-menu-item
+              (click)="UpdateStudent(student.Student_id)"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-success"
+              (click)="deleteStudent(student.Student_id)"
+              mat-menu-item
+            >
               Delete
             </button>
           </mat-menu>
@@ -62,16 +75,20 @@
     </tbody>
   </table>
 
-  <table class="table table-scripted table-bordered" *ngIf="searchedStudents && isSearch">
+  <table
+    class="table table-scripted table-bordered"
+    *ngIf="searchedStudents && isSearch"
+  >
     <thead class="thead-dark">
       <tr>
         <th class="text-center">Sr No</th>
         <th>Name</th>
         <th>Email</th>
         <th class="text-center">Mobile No</th>
-        <th>Department_Id</th>
+        <th>Department</th>
         <th>Gender</th>
         <th>DOB</th>
+        <th class="text-center">Options</th>
       </tr>
     </thead>
     <tbody>
@@ -80,26 +97,87 @@
         <td>{{student.Name}}</td>
         <td>{{student.Email}}</td>
         <td class="text-center">{{student.Mobile_number}}</td>
-        <td>{{student.Department_id}}</td>
+        <td>{{student.DEPARTMENT_NAME}}</td>
         <td>{{student.Gender}}</td>
         <td>{{student.Date_of_Birth}}</td>
+        <td class="text-center">
+          <button
+            class="text-white btn btn-success bg-black"
+            mat-button
+            [matMenuTriggerFor]="menu7"
+          >
+            Action
+          </button>
+          <mat-menu #menu7="matMenu">
+            <button
+              class="btn btn-success"
+              mat-menu-item
+              (click)="UpdateStudent(student.Student_id)"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-success"
+              (click)="deleteStudent(student.Student_id)"
+              mat-menu-item
+            >
+              Delete
+            </button>
+          </mat-menu>
+        </td>
       </tr>
     </tbody>
   </table>
 
-  <div class="ms-2 mb-4">
-    <button class="btn btn-success" (click)="prevPage()" [disabled]="currentPage===1">Prev</button>
+  <div class="ms-2 mb">
+    <button
+      class="btn btn-success"
+      (click)="prevPage()"
+      [disabled]="currentPage===1"
+    >
+      Prev
+    </button>
     <span> Page {{currentPage}} of {{totalPages}} </span>
-    <button class="btn btn-success" (click)="nextPage()" [disabled]="currentPage===totalPages">Next</button>
+    <button
+      class="btn btn-success"
+      (click)="nextPage()"
+      [disabled]="currentPage===totalPages"
+    >
+      Next
+    </button>
   </div>
-
-  
-
-  <!-- <div *ngIf="searchedStudents">
-    <p>No data found YRR</p>
-  </div> -->
-
   <ng-template #noData>
     <p>No data found</p>
   </ng-template>
+
+  <div
+    class="modal fade"
+    id="deleteModal"
+    tabindex="-1"
+    aria-labelledby="deleteModalLabel"
+    aria-hidden="true"
+    #deleteModal
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="deleteModalLabel">
+            Success
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">Student Deleted successfully!</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

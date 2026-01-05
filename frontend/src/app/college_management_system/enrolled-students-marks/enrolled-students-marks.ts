@@ -104,6 +104,9 @@ export class EnrolledStudentsMarks implements OnInit {
           if(this.students.length==0){
             const modal = new bootstrap.Modal(this.noStudentsModal.nativeElement);
             modal.show();
+            setTimeout(()=>{
+            modal.hide();
+          },2000)
             console.log("no student data found")
             this.selectedDept1=null;
             this.selectedDept2=null;
@@ -115,7 +118,7 @@ export class EnrolledStudentsMarks implements OnInit {
   }
 
   onReset() {
-    this.isReset = true;
+    this.isReset = false;
     this.selectedCourse = null;
     this.selectedDept1 = null;
     this.selectedDept2 = null;
@@ -140,11 +143,9 @@ export class EnrolledStudentsMarks implements OnInit {
           console.log('students assigned marks!!');
           const modal = new bootstrap.Modal(this.successModal.nativeElement);
           modal.show();
-          // this.selectedCourse = null;
-          // this.selectedDept1 = null;
-          // this.isGetDetails = false;
-          // this.selectedDept2 = null;
-          // this.students = [];
+          setTimeout(()=>{
+            modal.hide();
+          },2000)
           this.selectedStudentsMarks = {};
           this.onSubmit();
           
@@ -154,6 +155,9 @@ export class EnrolledStudentsMarks implements OnInit {
             this.alreadyAssignModal.nativeElement
           );
           modal.show();
+          setTimeout(()=>{
+            modal.hide();
+          },2000)
           console.log('marks already assign to student!!');
           console.error('error while saving student data!', err);
           this.selectedStudentsMarks = {};

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentService } from '../../services/student.service';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { routes } from '../../app.routes';
+declare var bootstrap: any;
+
 
 @Component({
   selector: 'app-view-student',
@@ -22,6 +24,8 @@ import { routes } from '../../app.routes';
   styleUrl: './view-student.css',
 })
 export class ViewStudent implements OnInit {
+  @ViewChild('deleteModal') deleteModal!: ElementRef;
+
   viewStudents: any[] = [];
   searchedName: string = '';
   searchedStudents: any[] = [];
@@ -40,22 +44,39 @@ export class ViewStudent implements OnInit {
   onSearchChange(value: string) {
     console.log('searched name is->', value);
     this.searchedName = value;
-    console.log('search box name at frontend is->', this.searchedName);
+    if (value.trim() === '') {
+      this.isSearch = false;
+      this.currentPage = 1;
+      this.loadStudents();
+    }
   }
 
   onSearch() {
-    this.isSearch = true;
-    this.studentService
-      .getSearchedName(this.currentPage, this.limit, this.searchedName)
-      .subscribe((data: any) => {
-        if (data) {
+    if (this.searchedName.trim() === '') {
+      this.isSearch = false;
+      this.currentPage = 1;
+      alert('Please type the name to be searched');
+      this.loadStudents();
+      return;
+    } else {
+      this.isSearch = true;
+      this.currentPage = 1;
+
+      this.studentService
+        .getSearchedName(this.currentPage, this.limit, this.searchedName)
+        .subscribe((data: any) => {
           this.searchedStudents = data.students || data;
           this.totalPages = data.totalPages || 0;
+          if (this.searchedStudents.length === 0) {
+            alert('No student found');
+            this.isSearch = false;
+            this.loadStudents();
+
+            return;
+          }
           this.formatedDates(this.searchedStudents);
-        } else {
-          console.log('No student found');
-        }
-      });
+        });
+    }
   }
 
   loadStudents() {
@@ -99,6 +120,13 @@ export class ViewStudent implements OnInit {
       next: () => {
         console.log('student deleted');
         this.loadStudents();
+
+        const modal = new bootstrap.Modal(this.deleteModal.nativeElement);
+        modal.show();
+
+          setTimeout(() => {
+            modal.hide();
+          }, 2000);
       },
       error: (error: any) => {
         console.log('error in deleting student data');

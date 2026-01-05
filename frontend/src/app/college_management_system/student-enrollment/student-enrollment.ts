@@ -13,9 +13,9 @@ declare var bootstrap: any;
 })
 export class StudentEnrollment implements OnInit {
   @ViewChild('successModal') successModal!: ElementRef;
-  @ViewChild('alreadyEnrolledModal') alreadyEnrolledModal!:ElementRef
-  @ViewChild('noRecordsModal') noRecordsModal!:ElementRef
-  
+  @ViewChild('alreadyEnrolledModal') alreadyEnrolledModal!: ElementRef;
+  @ViewChild('noRecordsModal') noRecordsModal!: ElementRef;
+
   departments: any[] = [];
   courses: any[] = [];
   selectedDept1: any = null;
@@ -28,7 +28,7 @@ export class StudentEnrollment implements OnInit {
   selectedCourseId: any[] = [];
   isGetDetails: boolean = false;
   isEnrollStudent: boolean = false;
-  isReset:boolean=false;
+  isReset: boolean = false;
 
   constructor(private studentService: StudentService) {}
 
@@ -66,10 +66,7 @@ export class StudentEnrollment implements OnInit {
 
   onSubmit() {
     this.isGetDetails = true;
-    if (
-      (!this.selectedCourse || !this.selectedDept1 || !this.selectedDept2) &&
-      this.isGetDetails
-    ) {
+    if (!this.selectedCourse || !this.selectedDept1 || !this.selectedDept2) {
       alert('All fields are mandatory');
       return;
     } else {
@@ -85,31 +82,38 @@ export class StudentEnrollment implements OnInit {
           );
           console.log('students of selected department are loaded:', data);
           this.students = data;
-          if (this.students.length===0) {
-            const modal = new bootstrap.Modal(this.noRecordsModal.nativeElement);
+          if (this.students.length === 0) {
+            const modal = new bootstrap.Modal(
+              this.noRecordsModal.nativeElement
+            );
             modal.show();
-            this.selectedCourse=null;
-            this.selectedDept1=null;
-            this.selectedDept2=null;
-            this.isGetDetails=false;
+            setTimeout(() => {
+              modal.hide();
+            }, 2000);
           }
           console.log('students are->', this.students);
         });
     }
   }
 
-  onReset(){
-    this.isReset=true;
-    this.selectedCourse=null;
-    this.selectedDept1=null
-    this.selectedDept2=null
-    this.students=[];
-    this.isGetDetails=false;
+  onReset() {
+    this.isReset = false;
+    this.selectedCourse = null;
+    this.selectedDept1 = null;
+    this.selectedDept2 = null;
+    this.students = [];
+    this.isGetDetails = false;
   }
 
   onCheckBoxChange(event: any, studentId: number) {
     if (event.target.checked) {
-      this.selectedStudentsIds.push(studentId);
+      if (!this.selectedStudentsIds.includes(studentId)) {
+        this.selectedStudentsIds.push(studentId);
+      }
+    } else {
+      this.selectedStudentsIds = this.selectedStudentsIds.filter(
+        (id) => id !== studentId
+      );
     }
     console.log('selected students ids are->', this.selectedStudentsIds);
   }
@@ -130,26 +134,25 @@ export class StudentEnrollment implements OnInit {
           console.log('students enrolled!!');
           const modal = new bootstrap.Modal(this.successModal.nativeElement);
           modal.show();
-          this.selectedCourse = null;
-          this.selectedDept1 = null;
-          this.isGetDetails = false;
-          this.isEnrollStudent=false;
-          this.selectedDept2 = null;
-          this.students = [];
-          this.selectedStudentsIds = [];
-          this.onSubmit()
 
+          setTimeout(() => {
+            modal.hide();
+          }, 2000);
+          this.onSubmit();
+          this.selectedStudentsIds = [];
         },
         error: (err: any) => {
-          const modal = new bootstrap.Modal(this.alreadyEnrolledModal.nativeElement);
+          const modal = new bootstrap.Modal(
+            this.alreadyEnrolledModal.nativeElement
+          );
           modal.show();
+          setTimeout(() => {
+            modal.hide();
+          }, 2000);
           console.error('error while saving student data!', err);
-          this.onSubmit()
-          this.selectedStudentsIds=[];
+          this.onSubmit();
+          this.selectedStudentsIds = [];
         },
       });
   }
 }
-
-
-

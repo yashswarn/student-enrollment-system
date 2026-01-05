@@ -1,142 +1,168 @@
-<div class="d-flex align-items-center h-100 justify-content-center">
-  <div class="ms-2 p-4 border rounded shadow bg-light w-25">
-  <h4 class="">Login as {{role | titlecase}}</h4>
-  <hr />
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <div class="mb-1">
-        <label for="email" class="form-label"
-          >Email :
-          <span class="text-danger">*</span>
-        </label>
+<div class="container d-flex align-items-center h-100 justify-content-center">
+  <div class="login-form p-4 border rounded shadow bg-light col-10 col-sm-7 col-lg-3">
+    <h4 class="">Login as {{role | titlecase}}</h4>
+    <hr />
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <div class="mb-1">
+          <label for="email" class="form-label"
+            >Email :
+            <span class="text-danger">*</span>
+          </label>
 
-        <input
-          id="email"
-          type="email"
-          class="form-control"
-          formControlName="email"
-          [ngClass]="{'is-invalid':f['email'].errors && isSubmitted}"
-          autocomplete="username"
-          />
-      </div>
-      <div *ngIf="f['email'].errors && isSubmitted" class="text-danger ps-2">
-        <div *ngIf="f['email'].errors?.['required']">Email is required.</div>
-        <div *ngIf="f['email'].errors?.['email']">Email is invalid;</div>
-        <div *ngIf="f['email'].errors?.['pattern']">Email is invalid;</div>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <div class="mb-1">
-        <label for="password" class="form-label"
-          >Password :
-          <span class="text-danger">*</span>
-        </label>
-        <div class="d-flex">
           <input
-            id="password"
-            [type]="isShowPassword?'text':'password'"
-            class="form-control loginPassword"
-            formControlName="password"
-            [ngClass]="{'is-invalid':isSubmitted && f['password'].errors}"
-            autocomplete="current-password"
-            />
-          <button
-            type="button"
-            class="btn passwordHideBtn"
-            (click)="togglePassword()"
-          >
-            <mat-icon
-              >{{isShowPassword?'visibility_off':'visibility'}}</mat-icon
-            >
-          </button>
+            id="email"
+            type="email"
+            class="form-control"
+            formControlName="email"
+            [ngClass]="{'is-invalid':f['email'].errors && isSubmitted}"
+            autocomplete="username"
+          />
+        </div>
+        <div *ngIf="f['email'].errors && isSubmitted" class="text-danger ps-2">
+          <div *ngIf="f['email'].errors?.['required']">Email is required.</div>
+          <div *ngIf="f['email'].errors?.['email']">Email is invalid;</div>
+          <div *ngIf="f['email'].errors?.['pattern']">Email is invalid;</div>
         </div>
       </div>
-      <div *ngIf="f['password'].errors && isSubmitted" class="text-danger ps-2">
-        <div *ngIf="f['password'].errors?.['required']">
-          Password is required.
-        </div>
-        <div *ngIf="f['password'].errors?.['minlength']">
-          Password must be at least 6 characters
-        </div>
-      </div>
-    </div>
-    <div>
-      <button type="submit" class="btn btn-primary w-100 btn-success">
-        Login
-      </button>
-    </div>
-    <div class="mt-2 text-center">
-      Not registered yet?
-      <a
-        href="registerpage"
-        class="link-offset-2 link-underline link-underline-opacity-0"
-        >Register</a
-      >
-    </div>
-  </form>
-  <div
-    class="modal fade"
-    id="successModal"
-    tabindex="-1"
-    aria-labelledby="successModalLabel"
-    aria-hidden="true"
-    #successModal
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-center" id="successModalLabel">
-            Success
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">Login successfully!</div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">
-            OK
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div
-    class="modal fade"
-    id="invalidModal"
-    tabindex="-1"
-    aria-labelledby="invalidModalLabel"
-    aria-hidden="true"
-    #invalidModal
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-warning text-dark">
-          <h5 class="modal-title" id="invalidModalLabel">Login Alert</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+      <div class="mb-3">
+        <div class="mb-1">
+          <label for="password" class="form-label"
+            >Password :
+            <span class="text-danger">*</span>
+          </label>
+          <!-- <div class="position-relative">
+            <input
+              id="password"
+              [type]="isShowPassword?'text':'password'"
+              class="form-control loginPassword"
+              formControlName="password"
+              [ngClass]="{'is-invalid':isSubmitted && f['password'].errors}"
+              autocomplete="current-password"
+            />
+            <button
+              type="button"
+              class="btn passwordHideBtn"
+              (click)="togglePassword()"
+            >
+              <mat-icon
+                >{{isShowPassword?'visibility_off':'visibility'}}</mat-icon
+              >
+            </button>
+          </div> -->
+          <div class="position-relative">
+            <input
+              id="password"
+              [type]="isShowPassword ? 'text' : 'password'"
+              class="form-control pe-5"
+              formControlName="password"
+              autocomplete="current-password"
+            />
+
+            <button
+              type="button"
+              class="d-flex btn position-absolute top-50 end-0 translate-middle-y me-3 p-0 border-0 bg-transparent"
+              (click)="togglePassword()"
+            >
+              <mat-icon>
+                {{ isShowPassword ? 'visibility_off' : 'visibility' }}
+              </mat-icon>
+            </button>
+          </div>
         </div>
-        <div class="modal-body">No records found</div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Okay
-          </button>
+        <div
+          *ngIf="f['password'].errors && isSubmitted"
+          class="text-danger ps-2"
+        >
+          <div *ngIf="f['password'].errors?.['required']">
+            Password is required.
+          </div>
+          <div *ngIf="f['password'].errors?.['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="login-btn btn btn-primary btn-success col-12">
+          Login
+        </button>
+      </div>
+      <div class="mt-2 register-btn text-center">
+        Not registered yet?
+        <a
+          href="registerpage"
+          class="link-offset-2 link-underline link-underline-opacity-0"
+          >Register</a
+        >
+      </div>
+    </form>
+    <div
+      class="modal fade"
+      id="successModal"
+      tabindex="-1"
+      aria-labelledby="successModalLabel"
+      aria-hidden="true"
+      #successModal
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="successModalLabel">
+              Success
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Login successfully!</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="invalidModal"
+      tabindex="-1"
+      aria-labelledby="invalidModalLabel"
+      aria-hidden="true"
+      #invalidModal
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-warning text-dark">
+            <h5 class="modal-title" id="invalidModalLabel">Login Alert</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">No records found</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Okay
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>

@@ -22,100 +22,7 @@ exports.getStudents = async (req, res) => {
     return res.status(400).send("server error");
   }
 
-  // const sql = `
-  //   select s.name,s.email,e.marks
-  //   from student s
-  //   inner join enrollments e on
-  //   e.student_id=s.student_id
-  //   where e.course_id=?
-  //   `;
-  // db.query(sql, [courseId], (error, result) => {
-  //   if (error) {
-  // console.error("course id is not found", error);
-  // return res.status(400).send("server error");
-  //   }
-  //   res.json(result);
-  // });
 };
-
-// exports.addStudents = async(req, res) => {
-//   const { name, email, department, dob, gender, mobile } = req.body;
-//   console.log("req body is->", req.body);
-
-//   await db.getConnection((error, connection) => {
-//     if (error) {
-//       console.error("connection error", error);
-//       return res.status
-//         (500)
-//         .json({ message: "database connection faild", error: error });
-//     } else {
-//       await connection.beginTransaction((error)=>{
-//         if(error){
-//           connection.release();
-//           return res.status(500).json({message:"Transaction start failed ho gya h",error:error})
-//         }
-//       })
-//       try {
-//         // if email already exist
-//         const [checkEmail] = await db.execute("select *from student where Email=?",[email]);
-//         connection.query(checkEmail, [email], (error, result) => {
-//           if (error) {
-//             return connection.rollback(() => {
-//               connection.release();
-//               return res.status(500).json({ message: "Email check failed", error });
-//             });
-//           }
-//           if (result.length > 0) {
-//             return connection.rollback(() => {
-//               connection.release();
-//               return res.status(409).json({ message: "Email already exist" });
-//             });
-//           } else {
-//             const insertQuery = `insert into student (Name
-//         ,Email
-//         ,Department_id,Date_of_Birth,Gender,Mobile_number)
-//         values(?,?,?,?,?,?)`;
-//             connection.query(
-//               insertQuery,
-//               [name, email, department, dob, gender, mobile],
-//               // lamda function for handling success and failure
-//               (error, result) => {
-//                 if (error) {
-//                   return connection.rollback(() => {
-//                     connection.release();
-
-//                   return res
-//                     .status(500)
-//                     .json({ message: "failed to insert student", error })
-//                   });
-
-//                 } else {
-//                   connection.commit((error)=>{
-//                     if(error){
-//                      return connection.rollback(()=>{
-//                         connection.release();
-//                      return   res.status(500).json({message:"commit failed",error:error})
-//                       })
-//                     }
-//                     else{
-//                       connection.release();
-//                     return  res.status(200).json({message:"student added successfully!1"})
-//                     }
-//                   })
-//                 }
-//               }
-//             );
-//           }
-//         });
-//       } catch (err) {
-//         connection.rollback(()=>{
-//           connection.release();
-//           res.status(500).json({message:"unexpected error",error:err})
-//         })
-//       }
-//     }
-//   });
-// };
 
 exports.addStudents = async (req, res) => {
   const { name, email, department, dob, gender, mobile } = req.body;
@@ -179,15 +86,6 @@ exports.getAllStudents = async (req, res) => {
   } catch (error) {
     res.status(400).send("query error");
   }
-
-  // db.query(sql, (err, result) => {
-  //   if (err) {
-  //     res.status(400).send("query error");
-  //   } else {
-  // console.log("all students data is such like that->", result);
-  // res.json(result);
-  //   }
-  // });
 };
 
 exports.getStudentsOfDept = async (req, res) => {
@@ -215,23 +113,7 @@ exports.getStudentsOfDept = async (req, res) => {
   } catch (error) {
     res.status(400).send("query error");
   }
-  // const sql = `select s.student_id,s.name,s.email,s.Mobile_number
-  // from student s
-  // left join enrollments e on
-  // s.Student_id=e.student_id and e.course_id=?
-  // where s.Department_id=? and e.course_id is null`;
-
-  // db.query(sql, [courseId, departmentId], (error, result) => {
-  //   if (error) {
-  //     res.status(400).send("query error");
-  //   } else {
-  // console.log(
-  //   "all students data who are not enrolled in selected course is->",
-  //   result
-  // );
-  // res.json(result);
-  //   }
-  // });
+  
 };
 
 exports.getStudentsOfCourse = async (req, res) => {
@@ -258,23 +140,6 @@ exports.getStudentsOfCourse = async (req, res) => {
   } catch (error) {
     res.status(400).send("query error");
   }
-  // const sql = `select s.student_id,s.name,s.department_id,s.email,s.Mobile_number,e.marks
-  // from student s
-  // left join enrollments e on
-  // s.Student_id=e.student_id and e.course_id=?
-  // where s.Department_id=? and e.marks is null`;
-
-  // db.query(sql, [courseId, departmentId], (error, result) => {
-  //   if (error) {
-  // res.status(400).send("query error");
-  //   } else {
-  // console.log(
-  //   "all students data who are not enrolled in selected course is->",
-  //   result
-  // );
-  // res.json(result);
-  //   }
-  // });
 };
 
 exports.getCount = async (req, res) => {
@@ -302,7 +167,8 @@ exports.getSearchedName = async (req, res) => {
   try {
     // 1. Get filtered students with LIMIT & OFFSET
     const [sql] = await db.execute(
-      `select * from student where name like ? limit ${limit} offset ${offset}`,
+
+      `select s.*, d.DEPARTMENT_NAME from student s left join departments d on s.Department_id=d.Department_id where s.name like ? limit ${limit} offset ${offset}`,
       [`%${searchName}%`]
     );
     console.log("the student with name is ", sql);
@@ -403,15 +269,6 @@ exports.updateStudent = async (req, res) => {
       "update student set Name=?, Email=?, Department_id=?, Date_of_Birth=?, Gender=?, Mobile_number=? where student_id=?",
       [name, email, department, dob, gender, mobile, studentId]
     );
-
-    // await connection.execute(updateQuery, [
-    //   name,
-    //   email,
-    //   department,
-    //   dob,
-    //   gender,
-    //   mobile,
-    // ]);
 
     // Commit transaction
     await connection.commit();

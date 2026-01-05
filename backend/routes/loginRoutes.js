@@ -6,7 +6,7 @@ const bcrypt=require('bcrypt');
 const loginController=require('../controller/loginController')
 const {authenticateToken,authorizeRoles}=require('../middleware/authMiddleware');
 
-router.post('/logindetails',loginController.formSubmit);
+router.post('/',loginController.formSubmit);
 router.get('/viewstudents',authenticateToken,authorizeRoles('admin','teacher'),(req,res)=>{
     res.send("welcome admin or teacher")
 })

@@ -9,6 +9,8 @@ import { StudentService } from '../../services/student.service';
 import { CommonModule } from '@angular/common';
 import { ChartConfiguration, ChartType } from 'chart.js';
 // import { NgChartsModule } from 'ng2-charts';
+import { ViewChild } from '@angular/core';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   standalone: true,
@@ -18,6 +20,8 @@ import { ChartConfiguration, ChartType } from 'chart.js';
   styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit {
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  
   totalStudents: number = 0;
   totalCourses: number = 0;
   activeEnrollments: number = 0;
@@ -25,6 +29,7 @@ export class Dashboard implements OnInit {
 
   barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
+    // animation:false,
     plugins: {
       legend: { display: false },
       title: { display: true, text: 'Course Popularity' },
@@ -35,6 +40,7 @@ export class Dashboard implements OnInit {
         afterFit: (axis) => {
           axis.paddingRight = 30; // right side extra space
         },
+      
         ticks: {
           // to small the text
           // callback:function(value:any,index:any,ticks:any){
@@ -86,6 +92,10 @@ export class Dashboard implements OnInit {
       console.log('coruse popularity is->', data);
       this.coursePopularity = data;
 
+      // this.barChartData.labels = data.map((d: any) => d.course_name);
+      // this.barChartData.datasets[0].data = data.map((d: any) => d.count);
+
+      // this.chart?.update();
       this.barChartData = {
         labels: data.map((d: any) => d.course_name),
         datasets: [
@@ -107,15 +117,10 @@ export class Dashboard implements OnInit {
         ],
       };
 
-    //  this.barChartData.labels = data.map((d: any) => d.course_name);
-    // this.barChartData.datasets[0].data = data.map((d: any) => d.count);
-
-    // // ✅ Background color dynamically set
-    // this.barChartData.datasets[0].backgroundColor = data.map(() => 
-    //   this.getRandomColor()
-    // ); 
-
-
+      // // ✅ Background color dynamically set
+      // this.barChartData.datasets[0].backgroundColor = data.map(() =>
+      //   this.getRandomColor()
+      // );
     });
   }
 
@@ -129,6 +134,4 @@ export class Dashboard implements OnInit {
   //   'rgba(255, 159, 64, 0.6)'
   // ];
   // return colors[Math.floor(Math.random() * colors.length)];
-  
 }
-
