@@ -94,11 +94,14 @@
       </div>
 
       <!-- reset button -->
-        <div *ngIf="students.length>0 && isGetDetails" class="d-flex justify-content-center justify-content-sm-start ps-sm-4">
-          <button (click)="onReset()" class="btn btn-primary btn-danger">
-            Reset
-          </button>
-        </div>
+      <div
+        *ngIf="students.length>0 && isGetDetails"
+        class="d-flex justify-content-center justify-content-sm-start ps-sm-4"
+      >
+        <button (click)="onReset()" class="btn btn-primary btn-danger">
+          Reset
+        </button>
+      </div>
 
       <!-- table -->
       <div class="mt-4" *ngIf="onSubmit">
@@ -132,8 +135,14 @@
       </div>
 
       <!-- enroll button -->
-      <div *ngIf="isGetDetails && students.length>0" class="d-flex justify-content-center">
-        <button class="btn btn-primary btn-success mb-4" (click)="enrollStudent()">
+      <div
+        *ngIf="isGetDetails && students.length>0"
+        class="d-flex justify-content-center"
+      >
+        <button
+          class="btn btn-primary btn-success mb-4"
+          (click)="enrollStudent()"
+        >
           Enroll
         </button>
       </div>

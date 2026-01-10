@@ -26,10 +26,9 @@ export class Student implements OnInit {
   @ViewChild('alreadyRegisteredModal') alreadyRegisteredModal!: ElementRef;
   @ViewChild('updateStudentModal') updateStudentModal!: ElementRef;
 
-
   studentForm!: FormGroup;
   isSubmitted = false;
-  isUpdated=false;
+  isUpdated = false;
   minDate: string = '';
   maxDate: string = '';
   submittedStudents: any[] = [];
@@ -38,23 +37,22 @@ export class Student implements OnInit {
   DEPARTMENT_ID: number = 0;
   studentId: number | null = null;
   isEdit: boolean = false;
-  role:string='';
+  role: string = '';
 
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
     private route: ActivatedRoute,
-    private routes:Router
+    private routes: Router
   ) {}
 
   ngOnInit() {
-
-    this.route.queryParams.subscribe((params:any)=>{
-      this.role=params['role'];
-      if (this.role==='admin') {
-        this.routes.navigate(["'/viewstudents'"])
-      }   
-    })
+    this.route.queryParams.subscribe((params: any) => {
+      this.role = params['role'];
+      if (this.role === 'admin') {
+        this.routes.navigate(["'/viewstudents'"]);
+      }
+    });
 
     this.studentId = this.route.snapshot.params['id'];
     console.log('student id at frontend angular is->', this.studentId);
@@ -65,17 +63,16 @@ export class Student implements OnInit {
       this.studentService
         .getStudentById(this.studentId)
         .subscribe((data: any) => {
-          const studentDob=data;
-          studentDob.dob=studentDob.dob.split('T')[0];
+          const studentDob = data;
+          studentDob.dob = studentDob.dob.split('T')[0];
           console.log('student data of editable student is->', data);
           this.studentForm.patchValue(data);
         });
-    } 
-      this.studentService.getDepartments().subscribe((data: any) => {
-        console.log('departments loaded:', data);
-        this.departments = data;
-      });
-    
+    }
+    this.studentService.getDepartments().subscribe((data: any) => {
+      console.log('departments loaded:', data);
+      this.departments = data;
+    });
 
     const today = new Date();
 
@@ -188,7 +185,6 @@ export class Student implements OnInit {
 
     // update
     if (this.studentForm.valid && this.studentId) {
-      
       // Trim name
       const trimName = this.studentForm.value.name.trim();
       this.studentForm.patchValue({ name: trimName });
@@ -203,36 +199,33 @@ export class Student implements OnInit {
               this.studentForm.value
             );
 
-            
             // Show success modal
-            const modal = new bootstrap.Modal(this.updateStudentModal.nativeElement);
+            const modal = new bootstrap.Modal(
+              this.updateStudentModal.nativeElement
+            );
             modal.show();
 
-            setTimeout(()=>{
-              modal.hide()
-            },2000)
-            
+            setTimeout(() => {
+              modal.hide();
+            }, 2000);
+
             this.submittedStudents.push(this.studentForm.value);
             this.studentForm.reset();
             this.isSubmitted = false;
           },
           error: (err: any) => {
             console.error('Error while updating student data ', err);
-            // alert('All fields are mandatory or invalid!');
-            // this.studentForm.markAllAsTouched();
 
             const modal = new bootstrap.Modal(
               this.alreadyRegisteredModal.nativeElement
             );
             modal.show();
-            setTimeout(()=>{
-              modal.hide()
-            },2000)
-            // this.studentForm.reset();
+            setTimeout(() => {
+              modal.hide();
+            }, 2000);
           },
         });
     } else if (this.studentForm.valid) {
-
       // Trim name
       const trimName = this.studentForm.value.name.trim();
       this.studentForm.patchValue({ name: trimName });
@@ -248,26 +241,24 @@ export class Student implements OnInit {
           const modal = new bootstrap.Modal(this.successModal.nativeElement);
           modal.show();
 
-          setTimeout(()=>{
+          setTimeout(() => {
             modal.hide();
-          },2000)
+          }, 2000);
 
           this.studentForm.reset();
           this.isSubmitted = false;
         },
         error: (err: any) => {
           console.error('Error while saving student data', err);
-          // alert('All fields are mandatory or invalid!');
-          // this.studentForm.markAllAsTouched();
 
           const modal = new bootstrap.Modal(
             this.alreadyRegisteredModal.nativeElement
           );
           modal.show();
-          
-          setTimeout(()=>{
-            modal.hide()
-          },1000)
+
+          setTimeout(() => {
+            modal.hide();
+          }, 1000);
           this.studentForm.reset();
         },
       });

@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { NgChartsModule } from 'ng2-charts';
-// import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Student } from '../Register_student/student';
 import { StudentService } from '../../services/student.service';
 import { CommonModule } from '@angular/common';
 import { ChartConfiguration, ChartType } from 'chart.js';
-// import { NgChartsModule } from 'ng2-charts';
 import { ViewChild } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 
@@ -21,7 +17,7 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class Dashboard implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-  
+
   totalStudents: number = 0;
   totalCourses: number = 0;
   activeEnrollments: number = 0;
@@ -40,16 +36,10 @@ export class Dashboard implements OnInit {
         afterFit: (axis) => {
           axis.paddingRight = 30; // right side extra space
         },
-      
+
         ticks: {
-          // to small the text
-          // callback:function(value:any,index:any,ticks:any){
-          //   let label=this.getLabelForValue(value);
-          //   return label.length>12?label.substring(0,12)+'...':label;
-          // },
           maxRotation: 45,
           minRotation: 30,
-          // autoSkip:false
         },
       },
       y: {
@@ -58,7 +48,6 @@ export class Dashboard implements OnInit {
     },
   };
 
-  // barChartLabels:string[]=[];
   barChartType: ChartType = 'bar';
 
   barChartData: ChartConfiguration['data'] = {
@@ -92,10 +81,6 @@ export class Dashboard implements OnInit {
       console.log('coruse popularity is->', data);
       this.coursePopularity = data;
 
-      // this.barChartData.labels = data.map((d: any) => d.course_name);
-      // this.barChartData.datasets[0].data = data.map((d: any) => d.count);
-
-      // this.chart?.update();
       this.barChartData = {
         labels: data.map((d: any) => d.course_name),
         datasets: [
@@ -116,22 +101,6 @@ export class Dashboard implements OnInit {
           },
         ],
       };
-
-      // // ✅ Background color dynamically set
-      // this.barChartData.datasets[0].backgroundColor = data.map(() =>
-      //   this.getRandomColor()
-      // );
     });
   }
-
-  // getRandomColor(): string {
-  // const colors = [
-  //   'rgba(75, 192, 192, 0.6)',
-  //   'rgba(255, 99, 132, 0.6)',
-  //   'rgba(54, 162, 235, 0.6)',
-  //   'rgba(255, 206, 86, 0.6)',
-  //   'rgba(153, 102, 255, 0.6)',
-  //   'rgba(255, 159, 64, 0.6)'
-  // ];
-  // return colors[Math.floor(Math.random() * colors.length)];
 }

@@ -29,19 +29,19 @@ export class Login {
 
   loginForm: FormGroup;
   isSubmitted = false;
-  isLoggedIn=false;
+  isLoggedIn = false;
   isShowPassword = false;
   submittedLogin: any[] = [];
-  role:string='';
-  email:string='';
-  password:string='';
+  role: string = '';
+  email: string = '';
+  password: string = '';
 
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
     private router: Router,
     private authService: Auth,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.loginForm = fb.group({
       email: [
@@ -59,11 +59,10 @@ export class Login {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params=>{
-      this.role=params['role'] || 'user';
+    this.route.queryParams.subscribe((params) => {
+      this.role = params['role'] || 'user';
       this.setDummyCredential(this.role);
-    })
-    
+    });
   }
 
   get f() {
@@ -97,9 +96,9 @@ export class Login {
           }
           const roles = decoded.role;
           this.authService.setUserRoles(roles);
-          const course=decoded.course;
+          const course = decoded.course;
 
-          console.log("roles and course are->",roles,course);
+          console.log('roles and course are->', roles, course);
 
           sessionStorage.setItem('roles', JSON.stringify(roles));
 
@@ -109,66 +108,58 @@ export class Login {
           } else if (roles.includes('teacher')) {
             // navigate to student panel
             this.router.navigate(['/enrolledstudentsmarks']);
-          }
-          else if(roles.includes('department_admin')){
-            this.router.navigate(['/studentenrollment'])
+          } else if (roles.includes('department_admin')) {
+            this.router.navigate(['/studentenrollment']);
           }
 
-          const modal = new bootstrap.Modal(
-            this.successModal.nativeElement);
+          const modal = new bootstrap.Modal(this.successModal.nativeElement);
           modal.show();
-          setTimeout(()=>{
+          setTimeout(() => {
             modal.hide();
-          },2000)
-          // this.loginForm.reset();
+          }, 2000);
           this.isSubmitted = false;
         },
         error: (err: any) => {
           console.log('error while saving login deatails:', err);
           const modal = new bootstrap.Modal(this.invalidModal.nativeElement);
           modal.show();
-          setTimeout(()=>{
+          setTimeout(() => {
             modal.hide();
-          },2000)
-          // this.loginForm.reset();
+          }, 2000);
           this.isSubmitted = false;
         },
       });
     }
   }
 
-  setDummyCredential(role:string){
-    switch(role){
+  setDummyCredential(role: string) {
+    switch (role) {
       case 'admin':
         this.loginForm.patchValue({
-          email:'vinod.gupta@gmail.com',
-          password:'vinod@123'
-        })
+          email: 'vinod.gupta@gmail.com',
+          password: 'vinod@123',
+        });
         break;
 
       case 'teacher':
         this.loginForm.patchValue({
-
-          email:'arvind.singh.chaudhary@gmail.com',
-          password:'Arvind@123'
-        })
+          email: 'arvind.singh.chaudhary@gmail.com',
+          password: 'Arvind@123',
+        });
         break;
 
       case 'department admin':
         this.loginForm.patchValue({
-
-          email:'vikas.soni@gmail.com',
-          password:'Vikas@123'
-        })
+          email: 'vikas.soni@gmail.com',
+          password: 'Vikas@123',
+        });
         break;
 
       default:
         this.loginForm.patchValue({
-
-          email:'',
-          password:''
-        })
-
+          email: '',
+          password: '',
+        });
     }
   }
 }

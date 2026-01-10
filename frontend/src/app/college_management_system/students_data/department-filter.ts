@@ -21,12 +21,10 @@ export class DepartmentFilterComponent implements OnInit {
   filterClicked: boolean = false;
   DEPARTMENT_ID: number = 0;
 
-  // constructor(private http:HttpClient){}
   constructor(private studentService: StudentService) {}
 
   ngOnInit() {
     // below call is a part of json
-    // this.http.get<any[]>('assets/jsons/departments.json').subscribe(data=>{
 
     this.studentService.getDepartments().subscribe((data: any) => {
       console.log('departments loaded by backend:', data);
@@ -36,9 +34,9 @@ export class DepartmentFilterComponent implements OnInit {
 
   onDepartmentChange() {
     // agr department selected h to, filter courses
-    this.selectedCourse=null;
-    this.filterClicked=false;
-    this.student=[];
+    this.selectedCourse = null;
+    this.filterClicked = false;
+    this.student = [];
     if (this.selectedDept) {
       console.log('selected department is->', this.selectedDept);
       this.studentService
@@ -51,9 +49,9 @@ export class DepartmentFilterComponent implements OnInit {
     }
   }
 
-  onCourseChange(){
-    this.student=[];
-    this.filterClicked=false;
+  onCourseChange() {
+    this.student = [];
+    this.filterClicked = false;
   }
 
   onFilterApply() {
@@ -61,7 +59,6 @@ export class DepartmentFilterComponent implements OnInit {
     if (!this.selectedCourse) {
       console.log('no course is selected');
       this.student = [];
-      // this.filterClicked=false;
       return;
     } else {
       console.log('selected course is->', this.selectedCourse);

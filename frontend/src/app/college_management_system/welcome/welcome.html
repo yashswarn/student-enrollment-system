@@ -1,8 +1,11 @@
 <div class="pt-5">
   <section id="home" class="box">
-    <div class="home d-flex flex-column justify-content-evenly mt-5  mb-5 mb-lg-0">
-      <!-- <h2 class="pt-3 mb-5 text-center">Student Enrollment System</h2> -->
-      <div class="container  d-flex flex-column align-items-center gap-3 flex-lg-row">
+    <div
+      class="home d-flex flex-column justify-content-evenly mb-3 mb-sm-5 mt-sm-5 mb-lg-0"
+    >
+      <div
+        class="container d-flex flex-column align-items-center gap-3 flex-lg-row"
+      >
         <div class="d-flex align-items-center w-lg-50 col-lg-6">
           <div class="d-flex flex-column">
             <div class="main-heading-div">
@@ -19,16 +22,22 @@
             </div>
           </div>
         </div>
-        <div class="d-flex justify-content-center main-img-div justify-content-lg-end">
+        <div
+          class="d-flex justify-content-center main-img-div justify-content-lg-end"
+        >
           <img
             src="assets/jsons/banner.png"
             alt="img"
-            class="main-img img-fluid rounded-5 w-75"
+            class="main-img img-fluid rounded-5 w- col-10"
           />
         </div>
       </div>
-      <div class="container d-flex justify-content-center justify-content-lg-start">
-        <button class="btn btn-success">Request Demo</button>
+      <div
+        class="container d-flex justify-content-center justify-content-lg-start"
+      >
+        <button class="btn btn-success" [routerLink]="'/loginpage'">
+          Request Demo
+        </button>
       </div>
     </div>
   </section>
@@ -38,7 +47,9 @@
       <h3 class="text-center mb-5">About Us</h3>
       <!-- about parent div  -->
       <div class="container gap-5">
-        <div class="about-div d-flex flex-column justify-content-lg-between flex-lg-row gap-5 mb-5 ">
+        <div
+          class="about-div d-flex flex-column justify-content-lg-between flex-lg-row gap-5 mb-5"
+        >
           <div class="card bg-white rounded-4 px-2 py-2 text col-lg-6">
             <h6 class="bg-black text-white rounded-5 ps-3 py-2">
               About Student Enrollment System
@@ -48,68 +59,79 @@
               to simplify and digitalize the management of students, courses,
               and academic processes. Our mission is to provide institutions
               with a secure, efficient, and user-friendly platform that enhances
-              productivity and reduces manual workload. 
+              productivity and reduces manual workload.
             </div>
           </div>
 
           <div class="">
             <div class="d-flex justify-content-center align-items-center h-100">
               <img
-                src="assets/jsons/what_we_do.png"
-                class="rounded-3 w-75"
+                src="assets/jsons/enrollment.jpg"
+                class="rounded-3 col-lg-7 col-9"
                 alt="image"
               />
             </div>
           </div>
         </div>
 
-        <div class="about-div d-flex flex-column justify-content-lg-between flex-lg-row gap-5 mb-5">
+        <div
+          class="about-div d-flex flex-column justify-content-lg-between flex-lg-row gap-5 mb-5"
+        >
           <div class="">
             <div class="d-flex justify-content-center align-items-center h-100">
               <img
-                src="assets/jsons/what_we_do.png"
-                class="rounded-3 w-75 h-lg-custom"
+                src="assets/jsons/vision.jpg"
+                class="rounded-3 col-lg-7 col-9"
                 alt="image"
               />
             </div>
           </div>
-          <div class="justify-content-lg-end bg-white rounded-4 px-2 py-2 text col-lg-6">
+          <div
+            class="justify-content-lg-end bg-white rounded-4 px-2 py-2 text col-lg-6"
+          >
             <h6 class="bg-black text-white rounded-5 ps-3 py-2">Our Vision</h6>
             <div class="ps-3">
-              To provide an intelligent, reliable, and modern platform that
-              enhances the educational enrollment process, making it more
-              transparent, accessible, and efficient for everyone involved.
+              Our vision is to provide an intelligent, reliable, and modern
+              platform that simplifies and enhances the educational enrollment
+              process, ensuring greater transparency, accessibility, efficiency,
+              and trust for students, institutions, administrators, and all
+              stakeholders involved in decision-making.
             </div>
           </div>
         </div>
 
-        <div class="about-div d-flex flex-column justify-content-lg-between flex-lg-row gap-5 mb-5">
+        <div
+          class="about-div d-flex flex-column justify-content-lg-between flex-lg-row gap-5 mb-5"
+        >
           <div class="bg-white rounded-4 px-2 py-2 text col-lg-6">
             <h6 class="bg-black text-white rounded-5 ps-3 py-2">Purpose</h6>
             <div class="ps-3">
-              The system reduces paperwork, minimizes errors, and saves time by
-              replacing traditional manual enrollment with an automated digital
-              solution. It helps institutions manage admissions, track student
-              details, and improve overall efficiency.
+              The system reduces paperwork, minimizes human errors, and saves
+              valuable time by replacing traditional manual enrollment processes
+              with an automated digital solution, helping institutions
+              efficiently manage admissions, track student records, and
+              significantly improve overall operational efficiency.
             </div>
           </div>
           <div class="">
             <div class="d-flex justify-content-center align-items-center h-100">
               <img
-                src="assets/jsons/what_we_do.png"
-                class="rounded-3 w-75"
+                src="assets/jsons/enrollment_image.jpg"
+                class="rounded-3 col-lg-7 col-9"
                 alt="image"
               />
             </div>
           </div>
         </div>
 
-        <div class="about-div d-flex flex-column justify-content-lg-between flex-lg-row gap-5 mb-5">
+        <div
+          class="about-div d-flex flex-column justify-content-lg-between flex-lg-row gap-5 mb-5"
+        >
           <div class="">
             <div class="d-flex justify-content-center align-items-center h-100">
               <img
-                src="assets/jsons/what_we_do.png"
-                class="rounded-3 w-75"
+                src="assets/jsons/future_enhancement.jpg"
+                class="rounded-3 col-lg-7 col-9"
                 alt="image"
               />
             </div>
@@ -135,7 +157,9 @@
     <div class="keyfeatures container mb-5">
       <h3 class="text-center mb-5">Key Features</h3>
       <div class="">
-        <div class="key-features-card d-flex flex-column flex-lg-row gap-5 mb-5">
+        <div
+          class="key-features-card d-flex flex-column flex-lg-row gap-5 mb-5"
+        >
           <div class="cards text1 left bg-white rounded-top-5 rounded-bottom">
             <div class="">
               <h6 class="bg-black text-white rounded-5 ps-3 py-2">
@@ -173,7 +197,9 @@
           </div>
         </div>
 
-        <div class="key-features-card d-flex flex-column flex-lg-row gap-5 mb-5">
+        <div
+          class="key-features-card d-flex flex-column flex-lg-row gap-5 mb-5"
+        >
           <div class="cards text1 left bg-white rounded-top-5 rounded-bottom">
             <div class="">
               <h6 class="bg-black text-white rounded-5 ps-3 py-2">
@@ -215,7 +241,7 @@
   </section>
 
   <section id="contact" class="">
-    <div class="contact mt-5 ">
+    <div class="contact mt-5">
       <h3 class="text-center mb-5">Contact us</h3>
       <div class="contact-div d-flex flex-column flex-lg-row">
         <div class="contact-img-div">
@@ -223,16 +249,10 @@
         </div>
 
         <div class="contact-main-div">
-          <div
-            class="flex-column h-100 bg-black text-white px-2 py-5"
-          >
+          <div class="flex-column h-100 bg-black text-white px-2 py-5">
             <p class="d-flex gap-2">
               <span class="">
-                  <img
-                  src="assets/jsons/email.png"
-                  class=" "
-                  alt="fsdf"
-                  />
+                <img src="assets/jsons/email.png" class=" " alt="fsdf" />
               </span>
               <a
                 href="mailto:yash27827@gmail.com"

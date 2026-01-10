@@ -1,53 +1,57 @@
 <div class="container mt-3 p-4 border rounded shadow bg-white w-50">
   <h3 class="mb-4 text-center fw-bold">Students Data</h3>
-  <hr/>
+  <hr />
   <div class="">
-
-  <div class="mb">
-    <label for="dept" class="form-label fw-semibold">Departments: 
+    <div class="mb">
+      <label for="dept" class="form-label fw-semibold"
+        >Departments:
         <span class="text-danger">*</span>
-    </label>
-    <select
-      id="dept"
-      class="form-select w-50"
-      [(ngModel)]="selectedDept"
-      (change)="onDepartmentChange()"
-      name="department"
-      required
-      #deptRef="ngModel"
-      [ngClass]="{ 'is-invalid': deptRef.invalid && filterClicked }"
-    >
-      <option [ngValue]="null">Select Department</option>
-      <option *ngFor="let dept of departments" [ngValue]="dept">
-        {{ dept.DEPARTMENT_NAME }}
-      </option>
-    </select>
-    <div *ngIf="deptRef.invalid && filterClicked" class="text-danger">Department is required</div>
-  </div>
-  <br />
-
-  <div class="mb-">
-    <label for="course" class="form-label fw-semibold">Course: 
-        <span class="text-danger">*</span>
-    </label>
-    <select 
-      id="course"
-      class="form-select w-50"
-      [(ngModel)]="selectedCourse"
-      (change)="onCourseChange()"
-      required
-      #courseRef="ngModel"
-      [ngClass]="{'is-invalid':courseRef.invalid && filterClicked}"
+      </label>
+      <select
+        id="dept"
+        class="form-select w-50"
+        [(ngModel)]="selectedDept"
+        (change)="onDepartmentChange()"
+        name="department"
+        required
+        #deptRef="ngModel"
+        [ngClass]="{ 'is-invalid': deptRef.invalid && filterClicked }"
       >
-      <option [ngValue]="null">Select Course</option>
-      <option *ngFor="let course of courses" [ngValue]="course">
-        {{ course.COURSE_NAME}}
-      </option>
-    </select>
-    <div *ngIf="courseRef.invalid && filterClicked" class="text-danger">course is required</div>
-  </div>
-  </div>
+        <option [ngValue]="null">Select Department</option>
+        <option *ngFor="let dept of departments" [ngValue]="dept">
+          {{ dept.DEPARTMENT_NAME }}
+        </option>
+      </select>
+      <div *ngIf="deptRef.invalid && filterClicked" class="text-danger">
+        Department is required
+      </div>
+    </div>
+    <br />
 
+    <div class="mb-">
+      <label for="course" class="form-label fw-semibold"
+        >Course:
+        <span class="text-danger">*</span>
+      </label>
+      <select
+        id="course"
+        class="form-select w-50"
+        [(ngModel)]="selectedCourse"
+        (change)="onCourseChange()"
+        required
+        #courseRef="ngModel"
+        [ngClass]="{ 'is-invalid': courseRef.invalid && filterClicked }"
+      >
+        <option [ngValue]="null">Select Course</option>
+        <option *ngFor="let course of courses" [ngValue]="course">
+          {{ course.COURSE_NAME }}
+        </option>
+      </select>
+      <div *ngIf="courseRef.invalid && filterClicked" class="text-danger">
+        course is required
+      </div>
+    </div>
+  </div>
 
   <br />
 

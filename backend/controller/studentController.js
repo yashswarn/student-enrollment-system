@@ -21,7 +21,6 @@ exports.getStudents = async (req, res) => {
     console.error("course id is not found", error);
     return res.status(400).send("server error");
   }
-
 };
 
 exports.addStudents = async (req, res) => {
@@ -113,7 +112,6 @@ exports.getStudentsOfDept = async (req, res) => {
   } catch (error) {
     res.status(400).send("query error");
   }
-  
 };
 
 exports.getStudentsOfCourse = async (req, res) => {
@@ -167,7 +165,6 @@ exports.getSearchedName = async (req, res) => {
   try {
     // 1. Get filtered students with LIMIT & OFFSET
     const [sql] = await db.execute(
-
       `select s.*, d.DEPARTMENT_NAME from student s left join departments d on s.Department_id=d.Department_id where s.name like ? limit ${limit} offset ${offset}`,
       [`%${searchName}%`]
     );
@@ -183,7 +180,6 @@ exports.getSearchedName = async (req, res) => {
     const totalPages = Math.ceil(totalRecords / limit);
 
     res.json({
-      // totalStudents,
       totalPages,
       currentPage: page,
       students: sql,

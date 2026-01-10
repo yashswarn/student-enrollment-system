@@ -1,10 +1,10 @@
-.loginPassword{
-    position: absolute;
-    width: 255px;
+.loginPassword {
+  position: absolute;
+  width: 255px;
 }
 
-.passwordHideBtn{
-    position: relative;
-    left: 210px;
-    border: none;
+.passwordHideBtn {
+  position: relative;
+  left: 210px;
+  border: none;
 }

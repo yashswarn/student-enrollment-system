@@ -13,7 +13,7 @@ declare var bootstrap: any;
 export class EnrolledStudentsMarks implements OnInit {
   @ViewChild('successModal') successModal!: ElementRef;
   @ViewChild('alreadyAssignModal') alreadyAssignModal!: ElementRef;
-  @ViewChild('noStudentsModal') noStudentsModal!:ElementRef;
+  @ViewChild('noStudentsModal') noStudentsModal!: ElementRef;
 
   constructor(private studentService: StudentService) {}
 
@@ -42,7 +42,7 @@ export class EnrolledStudentsMarks implements OnInit {
       this.studentService
         .getCourses(this.selectedDept1.DEPARTMENT_ID)
         .subscribe((data: any) => {
-          console.log('couses loaded:', data);
+          console.log('couses loaded bhihlik:', data);
           this.courses = data;
         });
     }
@@ -101,17 +101,19 @@ export class EnrolledStudentsMarks implements OnInit {
             data
           );
           this.students = data;
-          if(this.students.length==0){
-            const modal = new bootstrap.Modal(this.noStudentsModal.nativeElement);
+          if (this.students.length == 0) {
+            const modal = new bootstrap.Modal(
+              this.noStudentsModal.nativeElement
+            );
             modal.show();
-            setTimeout(()=>{
-            modal.hide();
-          },2000)
-            console.log("no student data found")
-            this.selectedDept1=null;
-            this.selectedDept2=null;
-            this.selectedCourse=null;
-            this.isGetDetails=false;
+            setTimeout(() => {
+              modal.hide();
+            }, 2000);
+            console.log('no student data found');
+            this.selectedDept1 = null;
+            this.selectedDept2 = null;
+            this.selectedCourse = null;
+            this.isGetDetails = false;
           }
         });
     }
@@ -143,27 +145,25 @@ export class EnrolledStudentsMarks implements OnInit {
           console.log('students assigned marks!!');
           const modal = new bootstrap.Modal(this.successModal.nativeElement);
           modal.show();
-          setTimeout(()=>{
+          setTimeout(() => {
             modal.hide();
-          },2000)
+          }, 2000);
           this.selectedStudentsMarks = {};
           this.onSubmit();
-          
         },
         error: (err: any) => {
           const modal = new bootstrap.Modal(
             this.alreadyAssignModal.nativeElement
           );
           modal.show();
-          setTimeout(()=>{
+          setTimeout(() => {
             modal.hide();
-          },2000)
+          }, 2000);
           console.log('marks already assign to student!!');
           console.error('error while saving student data!', err);
           this.selectedStudentsMarks = {};
           this.onSubmit();
-          // this.isGetDetails = false;
-          this.isAssignMarks=false
+          this.isAssignMarks = false;
         },
       });
   }

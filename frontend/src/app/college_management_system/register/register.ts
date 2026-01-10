@@ -21,7 +21,7 @@ declare var bootstrap: any;
 export class Register {
   @ViewChild('successModal') successModal!: ElementRef;
   @ViewChild('alreadyRegisteredModal') alreadyRegisteredModal!: ElementRef;
-  
+
   registerForm: FormGroup;
   isSubmitted = false;
   isShowPassword = false;
@@ -64,17 +64,23 @@ export class Register {
           console.log('submitted register added!!');
           const modal = new bootstrap.Modal(this.successModal.nativeElement);
           modal.show();
+          setTimeout(() => {
+            modal.hide();
+          }, 2000);
           this.registerForm.reset();
-          this.isSubmitted=false;
-
-
+          this.isSubmitted = false;
         },
         error: (err: any) => {
           console.log('error while saving register deatails:', err);
-          const modal = new bootstrap.Modal(this.alreadyRegisteredModal.nativeElement);
+          const modal = new bootstrap.Modal(
+            this.alreadyRegisteredModal.nativeElement
+          );
           modal.show();
+          setTimeout(() => {
+            modal.hide();
+          }, 2000);
           this.registerForm.reset();
-          this.isSubmitted=false;
+          this.isSubmitted = false;
         },
       });
     }

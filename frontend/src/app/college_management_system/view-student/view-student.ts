@@ -1,4 +1,4 @@
-import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentService } from '../../services/student.service';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { routes } from '../../app.routes';
 declare var bootstrap: any;
-
 
 @Component({
   selector: 'app-view-student',
@@ -124,9 +123,9 @@ export class ViewStudent implements OnInit {
         const modal = new bootstrap.Modal(this.deleteModal.nativeElement);
         modal.show();
 
-          setTimeout(() => {
-            modal.hide();
-          }, 2000);
+        setTimeout(() => {
+          modal.hide();
+        }, 2000);
       },
       error: (error: any) => {
         console.log('error in deleting student data');

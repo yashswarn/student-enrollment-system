@@ -32,22 +32,22 @@ exports.formSubmit = async (req, res) => {
       );
 
       const roles = roleRows.map((role) => role.role_name);
-      // const roles = roleRows;
       console.log("roles is->", roles);
 
       const [courseRows] = await db.execute(
-        "select c.course_name from courses c join teacher_course_mapping tcm on c.course_id=tcm.course_id where tcm.user_id=?",[user.id]
+        "select c.course_name from courses c join teacher_course_mapping tcm on c.course_id=tcm.course_id where tcm.user_id=?",
+        [user.id]
       );
 
-      const courseName=courseRows.map((course)=>course.course_name);
-      console.log("course name is->",courseName);
+      const courseName = courseRows.map((course) => course.course_name);
+      console.log("course name is->", courseName);
 
       const token = jwt.sign(
         {
           id: user.id,
           email: user.email,
           role: roles,
-          course:courseName,
+          course: courseName,
         },
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
@@ -59,7 +59,7 @@ exports.formSubmit = async (req, res) => {
         user_ka: safeUser,
         token: token,
         role: roles,
-        course:courseName,
+        course: courseName,
       });
     }
   } catch (err) {

@@ -126,7 +126,6 @@ exports.CoursePopularity = async (req, res) => {
       "select c.course_name, count(e.course_id) as count from courses c left join enrollments e on e.course_id=c.course_id group by c.course_name order by count desc"
     );
     console.log("data on backend is->", sql);
-    // res.status(200).send({message:"data fetched on backend side"})
     res.json(sql);
   } catch (err) {
     res.status(400).send("query eror");

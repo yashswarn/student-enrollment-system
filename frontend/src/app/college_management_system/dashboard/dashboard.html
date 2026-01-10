@@ -1,6 +1,11 @@
 <div class="container d-flex flex-column pt-5">
-  <div class="d-flex flex-column align-items-center flex-lg-row gap-5 pt-5 position-">
-    <mat-card class="text-white w-50" *ngIf="totalStudents">
+  <div
+    class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-center gap-5 pt-5 position-"
+  >
+    <mat-card
+      class="text-white col-12 col-sm-10 col-md-8 w-lg-25"
+      *ngIf="totalStudents"
+    >
       <mat-card-header>
         <mat-card-title> Total students </mat-card-title>
       </mat-card-header>
@@ -9,7 +14,10 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="text-white w-50" *ngIf="totalCourses">
+    <mat-card
+      class="text-white col-12 col-sm-10 col-md-8 w-lg-25"
+      *ngIf="totalCourses"
+    >
       <mat-card-header>
         <mat-card-title> Total Courses </mat-card-title>
       </mat-card-header>
@@ -18,7 +26,10 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="text-white w-50" *ngIf="activeEnrollments">
+    <mat-card
+      class="text-white col-12 col-sm-10 col-md-8 w-lg-25"
+      *ngIf="activeEnrollments"
+    >
       <mat-card-header>
         <mat-card-title> Active Enrollments </mat-card-title>
       </mat-card-header>

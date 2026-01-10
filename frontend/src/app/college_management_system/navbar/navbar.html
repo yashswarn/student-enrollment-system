@@ -1,33 +1,110 @@
 <div class="position-fixed w-100">
-  <nav class="p-2 bg-black  bg-light border-bottom gap-3">
-    <div class="d-flex justify-content-end ">
-      <div>
+  <nav class="p-2 bg-black bg-light border-bottom gap-3">
+    <div class="d-flex justify-content-end">
+      <!-- desktop menu -->
+      <div class="desktop-menu">
         <div>
-          <button class="text-white" mat-button  (click)="scrollToSection('home')">Home</button>
-          <button class="" mat-button *ngIf="hasRole('admin') && (router.url!=='/viewstudents')"  [routerLink]="'/viewstudents'">View Students</button>
-          <button class="" mat-button *ngIf="hasRole('admin') && (router.url!=='/registerstudent')"   [routerLink]="'/registerstudent'">Register Student</button>
-          <button class="text-white" mat-button [routerLink]="'/dashboard'">Dashboard</button>
-          <button class="text-white" mat-button  (click)="scrollToSection('about')">About</button>
-          <button class="text-white" mat-button  (click)="scrollToSection('keyfeatures')">Features</button>
-          <button class="text-white" mat-button  (click)="scrollToSection('contact')">Contact</button>
-        </div>
-      </div>
+          <button
+            class="text-white"
+            mat-button
+            (click)="scrollToSection('home')"
+          >
+            Home
+          </button>
+          <button
+            class="text-white"
+            mat-button
+            (click)="scrollToSection('about')"
+          >
+            About
+          </button>
+          <button
+            class="text-white"
+            mat-button
+            (click)="scrollToSection('keyfeatures')"
+          >
+            Features
+          </button>
+          <button
+            class="text-white"
+            mat-button
+            (click)="scrollToSection('contact')"
+          >
+            Contact
+          </button>
+          <button class="text-white" mat-button [routerLink]="'/dashboard'">
+            Dashboard
+          </button>
+          <button
+            class=""
+            mat-button
+            *ngIf="hasRole('admin') && (router.url!=='/viewstudents')"
+            [routerLink]="'/viewstudents'"
+          >
+            View Students
+          </button>
+          <button
+            class=""
+            mat-button
+            *ngIf="hasRole('admin') && (router.url!=='/registerstudent')"
+            [routerLink]="'/registerstudent'"
+          >
+            Register Student
+          </button>
 
-      <div>
+          <button
+            class=""
+            mat-button
+            *ngIf="hasRole('teacher') && (router.url!=='/enrolledstudentsmarks')"
+            [routerLink]="'/enrolledstudentsmarks'"
+          >
+            Assign Marks
+          </button>
+
+          <button
+            class=""
+            mat-button
+            *ngIf="hasRole('department_admin') && (router.url!=='/studentenrollment')"
+            [routerLink]="'/studentenrollment'"
+          >
+            Enroll Students
+          </button>
+        </div>
+
+        <!-- login/register -->
         <div *ngIf="!authService.isLoggedIn()">
           <button class="text-white" mat-button [matMenuTriggerFor]="menu5">
             Login / Register
           </button>
           <mat-menu #menu5="matMenu">
-            <button mat-menu-item [routerLink]="'/loginpage'" [queryParams]="{role:'admin'}">Login As Admin</button>
-            <button mat-menu-item [routerLink]="'/loginpage'" [queryParams]="{role:'teacher'}">Login As Teacher</button>
-            <button mat-menu-item [routerLink]="'/loginpage'" [queryParams]="{role:'department admin'}">Login As Department Admin</button>
+            <button
+              mat-menu-item
+              [routerLink]="'/loginpage'"
+              [queryParams]="{role:'admin'}"
+            >
+              Login As Admin
+            </button>
+            <button
+              mat-menu-item
+              [routerLink]="'/loginpage'"
+              [queryParams]="{role:'teacher'}"
+            >
+              Login As Teacher
+            </button>
+            <button
+              mat-menu-item
+              [routerLink]="'/loginpage'"
+              [queryParams]="{role:'department admin'}"
+            >
+              Login As Department Admin
+            </button>
             <button mat-menu-item [routerLink]="'/registerpage'">
               Register
             </button>
           </mat-menu>
         </div>
 
+        <!-- logout -->
         <div *ngIf="authService.isLoggedIn()">
           <button mat-button [matMenuTriggerFor]="menu7">Logout</button>
           <mat-menu #menu7="matMenu">
@@ -35,6 +112,93 @@
           </mat-menu>
         </div>
       </div>
+
+      <div>
+        <!-- hambergor -->
+        <button
+          mat-icon-button
+          class="mobile-menu-btn"
+          [matMenuTriggerFor]="mobileMenu"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
     </div>
   </nav>
 </div>
+
+<mat-menu #mobileMenu="matMenu">
+  <button mat-menu-item (click)="scrollToSection('home')">Home</button>
+  <button mat-menu-item (click)="scrollToSection('about')">About</button>
+  <button mat-menu-item (click)="scrollToSection('keyfeatures')">
+    Features
+  </button>
+  <button mat-menu-item (click)="scrollToSection('contact')">Contact</button>
+
+  <button mat-menu-item [routerLink]="'/dashboard'">Dashboard</button>
+
+  <button
+    mat-menu-item
+    *ngIf="hasRole('admin') && (router.url!=='/viewstudents')"
+    [routerLink]="'/viewstudents'"
+  >
+    View Students
+  </button>
+
+  <button
+    mat-menu-item
+    *ngIf="hasRole('admin') && (router.url!=='/registerstudent')"
+    [routerLink]="'/registerstudent'"
+  >
+    Register Student
+  </button>
+
+  <button
+    class=""
+    mat-menu-item
+    *ngIf="hasRole('teacher') && (router.url!=='/enrolledstudentsmarks')"
+    [routerLink]="'/enrolledstudentsmarks'"
+  >
+    Assign Marks
+  </button>
+
+  <button
+    class=""
+    mat-menu-item
+    *ngIf="hasRole('department_admin') && (router.url!=='/studentenrollment')"
+    [routerLink]="'/studentenrollment'"
+  >
+    Enroll Students
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="!authService.isLoggedIn()">
+    <button
+      mat-menu-item
+      [routerLink]="'/loginpage'"
+      [queryParams]="{role:'admin'}"
+    >
+      Login as Admin
+    </button>
+    <button
+      mat-menu-item
+      [routerLink]="'/loginpage'"
+      [queryParams]="{role:'teacher'}"
+    >
+      Login as Teacher
+    </button>
+    <button
+      mat-menu-item
+      [routerLink]="'/loginpage'"
+      [queryParams]="{role:'department admin'}"
+    >
+      Login as Department Admin
+    </button>
+    <button mat-menu-item [routerLink]="'/registerpage'">Register</button>
+  </ng-container>
+
+  <button mat-menu-item *ngIf="authService.isLoggedIn()" (click)="logout()">
+    Logout
+  </button>
+</mat-menu>

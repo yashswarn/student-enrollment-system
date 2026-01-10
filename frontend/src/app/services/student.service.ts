@@ -14,7 +14,7 @@ export class StudentService {
   }
 
   getCourses(DEPARTMENT_ID: number) {
-    console.log('department id is->', DEPARTMENT_ID);
+    console.log('department id at student service is->', DEPARTMENT_ID);
     if (!DEPARTMENT_ID) {
       return throwError(
         () =>
@@ -36,11 +36,13 @@ export class StudentService {
     );
   }
 
-  getStudentById(studentId:number){
-    return this.http.get(`${environment.backendUrl}/students/getstudentbyid/${studentId}`)
+  getStudentById(studentId: number) {
+    return this.http.get(
+      `${environment.backendUrl}/students/getstudentbyid/${studentId}`
+    );
   }
 
-  updateStudent(studentId:number,submittedStudents:any){
+  updateStudent(studentId: number, submittedStudents: any) {
     return this.http.put(
       `${environment.backendUrl}/students/update/${studentId}`,
       submittedStudents
@@ -129,8 +131,6 @@ export class StudentService {
       });
     }
 
-    // console.log("student array is->",studentsArray)
-
     const payload = {
       courseId: COURSE_ID,
       students: studentsArray,
@@ -138,15 +138,15 @@ export class StudentService {
 
     console.log('Payload to be sent:', payload);
 
-    return this.http.post(`${environment.backendUrl}/enrollments/marks`, payload);
+    return this.http.post(
+      `${environment.backendUrl}/enrollments/marks`,
+      payload
+    );
   }
 
   formSubmit(submittedLogin: any) {
     console.log('submitted login at services side are->', submittedLogin);
-    return this.http.post(
-      `${environment.backendUrl}/login`,
-      submittedLogin
-    );
+    return this.http.post(`${environment.backendUrl}/login`, submittedLogin);
   }
 
   RegisterFormSubmit(submittedRegister: any) {
@@ -157,28 +157,33 @@ export class StudentService {
     );
   }
 
-  getCount(){
+  getCount() {
     return this.http.get(`${environment.backendUrl}/students/count`);
   }
 
-  getCourseCount(){
+  getCourseCount() {
     return this.http.get(`${environment.backendUrl}/courses/coursecount`);
   }
 
-  getActiveEnrollments(){
-    // return this.http.get('http://localhost:3000/courses/activeenrollments')
+  getActiveEnrollments() {
     return this.http.get(`${environment.backendUrl}/courses/activeenrollments`);
   }
 
-  getCoursePopularity(){
-    return this.http.get(`${environment.backendUrl}/enrollments/coursepopularity`)
+  getCoursePopularity() {
+    return this.http.get(
+      `${environment.backendUrl}/enrollments/coursepopularity`
+    );
   }
 
-  getSearchedName(page:number, limit:number, searchedName:string=''){
-    return this.http.get(`${environment.backendUrl}/students/getsearchedname?page=${page}&limit=${limit}&searchedName=${searchedName}`)
+  getSearchedName(page: number, limit: number, searchedName: string = '') {
+    return this.http.get(
+      `${environment.backendUrl}/students/getsearchedname?page=${page}&limit=${limit}&searchedName=${searchedName}`
+    );
   }
 
-  deleteStudent(Student_id:number){
-    return this.http.delete(`${environment.backendUrl}/students/deletestudent/${Student_id}`)
+  deleteStudent(Student_id: number) {
+    return this.http.delete(
+      `${environment.backendUrl}/students/deletestudent/${Student_id}`
+    );
   }
 }

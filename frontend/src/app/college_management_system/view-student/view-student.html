@@ -3,16 +3,15 @@
     <div class="d-flex flex-column flex-sm-row gap-2 ms-2">
       <div class="d-flex">
         <label for="search" class="form-label">Search by name: </label>
-      <input
-        type="search"
-        id="search"
-        class="form-input"
-        [(ngModel)]="searchedName"
-        (ngModelChange)="onSearchChange($event)"
-      />
+        <input
+          type="search"
+          id="search"
+          class="form-input"
+          [(ngModel)]="searchedName"
+          (ngModelChange)="onSearchChange($event)"
+        />
       </div>
       <div class="">
-
         <button class="btn btn-primary btn-success" (click)="onSearch()">
           Search
         </button>
@@ -161,9 +160,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title text-center" id="deleteModalLabel">
-            Success
-          </h5>
+          <h5 class="modal-title text-center" id="deleteModalLabel">Success</h5>
           <button
             type="button"
             class="btn-close"

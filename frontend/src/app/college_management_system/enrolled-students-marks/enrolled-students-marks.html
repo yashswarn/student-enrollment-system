@@ -7,9 +7,7 @@
         Assign Marks to Enrolled Students
       </h4>
       <hr />
-      <div
-        class="d-flex flex-column justify-content-lg-between gap-4 p-4"
-      >
+      <div class="d-flex flex-column justify-content-lg-between gap-4 p-4">
         <div class="d-flex flex-column gap-2 col-sm-8 col-lg-5">
           <label for="dept1" class="form-label"
             >Departments:
@@ -95,7 +93,10 @@
       </div>
 
       <!-- reset button -->
-      <div *ngIf="students.length>0 && isGetDetails" class="d-flex justify-content-center justify-content-sm-start ps-sm-4">
+      <div
+        *ngIf="students.length>0 && isGetDetails"
+        class="d-flex justify-content-center justify-content-sm-start ps-sm-4"
+      >
         <button (click)="onReset()" class="btn btn-primary btn-danger">
           Reset
         </button>
@@ -139,8 +140,14 @@
       </div>
 
       <!-- assign button -->
-      <div *ngIf="isGetDetails && students.length>0" class="d-flex justify-content-center">
-        <button class="btn btn-primary btn-success mb-4" (click)="assignMarks()">
+      <div
+        *ngIf="isGetDetails && students.length>0"
+        class="d-flex justify-content-center"
+      >
+        <button
+          class="btn btn-primary btn-success mb-4"
+          (click)="assignMarks()"
+        >
           Assign
         </button>
       </div>
