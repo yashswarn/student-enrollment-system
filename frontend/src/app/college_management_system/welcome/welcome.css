@@ -23,6 +23,14 @@
   height: 1px;
 }
 
+@media (max-width: 576px) {
+  .main-heading-div h1{
+    font-size: 24px;
+  }
+
+}
+
+
 @media (min-width: 992px) {
   .keyfeatures {
     height: 100vh;
